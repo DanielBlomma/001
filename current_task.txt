@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #17: Rich text editor supports bold formatting
+## Task #18: Rich text editor supports italic formatting
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type text in editor", "Step 4: Select text", "Step 5: Click bold button", "Step 6: Verify text appears bold in editor", "Step 7: Save and preview", "Step 8: Verify bold formatting preserved"]
+["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type text", "Step 4: Select text", "Step 5: Click italic button", "Step 6: Verify italic style applied", "Step 7: Save and verify on public site"]
 
 ---
 
