@@ -295,7 +295,7 @@
       "Step 7: Save and preview",
       "Step 8: Verify bold formatting preserved"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -309,7 +309,7 @@
       "Step 6: Verify italic style applied",
       "Step 7: Save and verify on public site"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
