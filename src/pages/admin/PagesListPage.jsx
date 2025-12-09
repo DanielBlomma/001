@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card'
-import { FileText, Plus, Search, Edit, Trash2, Eye } from 'lucide-react'
+import { FileText, Plus, Search, Edit, Trash2, Eye, Copy } from 'lucide-react'
 
 export default function PagesListPage() {
   const navigate = useNavigate()
@@ -58,6 +58,30 @@ export default function PagesListPage() {
       }
     } catch (error) {
       console.error('Error deleting page:', error)
+    }
+  }
+
+  async function duplicatePage(id) {
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`http://localhost:3001/api/pages/${id}/duplicate`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (response.ok) {
+        const duplicatedPage = await response.json()
+        alert(`Page duplicated successfully: "${duplicatedPage.title}"`)
+        fetchPages()
+      } else {
+        const error = await response.json()
+        alert(`Error duplicating page: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error duplicating page:', error)
+      alert('An error occurred while duplicating the page')
     }
   }
 
@@ -193,6 +217,15 @@ export default function PagesListPage() {
                             title="Preview"
                           >
                             <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => duplicatePage(page.id)}
+                            title="Duplicate"
+                            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                          >
+                            <Copy className="w-4 h-4" />
                           </Button>
                           <Button
                             variant="ghost"

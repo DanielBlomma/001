@@ -278,4 +278,66 @@ router.put('/:id/unpublish', authenticateToken, (req, res) => {
   }
 })
 
+// Duplicate page
+router.post('/:id/duplicate', authenticateToken, (req, res) => {
+  try {
+    // Get the original page
+    const originalPage = db.prepare('SELECT * FROM pages WHERE id = ?').get(req.params.id)
+
+    if (!originalPage) {
+      return res.status(404).json({ error: 'Page not found' })
+    }
+
+    // Create new title with (Copy) suffix
+    const newTitle = `${originalPage.title} (Copy)`
+
+    // Generate unique slug from new title
+    let newSlug = newTitle
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+
+    // Check if slug exists and make it unique if needed
+    let slugCounter = 1
+    let finalSlug = newSlug
+    while (db.prepare('SELECT id FROM pages WHERE slug = ?').get(finalSlug)) {
+      finalSlug = `${newSlug}-${slugCounter}`
+      slugCounter++
+    }
+
+    // Insert duplicated page
+    const result = db.prepare(`
+      INSERT INTO pages (
+        title, slug, content, excerpt, template, status, parent_id, author_id, featured_image_id
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      newTitle,
+      finalSlug,
+      originalPage.content || '',
+      originalPage.excerpt || '',
+      originalPage.template || 'standard',
+      'draft', // Always create duplicate as draft
+      originalPage.parent_id || null,
+      req.user.id, // Current user becomes the author
+      originalPage.featured_image_id || null
+    )
+
+    // Get the created page with author info
+    const duplicatedPage = db.prepare(`
+      SELECT
+        p.*,
+        u.name as author_name,
+        u.email as author_email
+      FROM pages p
+      LEFT JOIN users u ON p.author_id = u.id
+      WHERE p.id = ?
+    `).get(result.lastInsertRowid)
+
+    res.status(201).json(duplicatedPage)
+  } catch (error) {
+    console.error('Duplicate page error:', error)
+    res.status(500).json({ error: 'An error occurred while duplicating the page' })
+  }
+})
+
 export default router

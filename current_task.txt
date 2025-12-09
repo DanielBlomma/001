@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #9: Delete page with confirmation removes from database
+## Task #10: Duplicate page creates copy with '(Copy)' suffix
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to Pages list", "Step 3: Click delete on a page", "Step 4: Confirm deletion in modal", "Step 5: Verify success message", "Step 6: Verify page removed from list", "Step 7: Try accessing deleted page by ID", "Step 8: Verify 404 error"]
+["Step 1: Login to admin panel", "Step 2: Navigate to Pages list", "Step 3: Click duplicate on a page", "Step 4: Verify success message", "Step 5: Verify duplicated page appears in list", "Step 6: Verify title includes '(Copy)'", "Step 7: Open duplicated page", "Step 8: Verify content matches original"]
 
 ---
 

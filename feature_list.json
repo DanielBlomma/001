@@ -188,7 +188,7 @@
       "Step 7: Open duplicated page",
       "Step 8: Verify content matches original"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
