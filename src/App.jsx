@@ -5,6 +5,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/public/HomePage'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
+import PagesListPage from './pages/admin/PagesListPage'
+import PageEditorPage from './pages/admin/PageEditorPage'
 
 function App() {
   return (
@@ -23,10 +25,9 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
           <Route index element={<AdminDashboard />} />
-          <Route path="pages" element={<div className="p-6">
-            <h1 className="text-2xl font-bold">Pages</h1>
-            <p className="text-muted-foreground mt-2">Pages management will be implemented here</p>
-          </div>} />
+          <Route path="pages" element={<PagesListPage />} />
+          <Route path="pages/new" element={<PageEditorPage />} />
+          <Route path="pages/:id/edit" element={<PageEditorPage />} />
           <Route path="media" element={<div className="p-6">
             <h1 className="text-2xl font-bold">Media Library</h1>
             <p className="text-muted-foreground mt-2">Media library will be implemented here</p>

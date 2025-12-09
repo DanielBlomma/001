@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { initDatabase } from './models/database.js'
 import authRoutes from './routes/auth.js'
+import pagesRoutes from './routes/pages.js'
 
 // Load environment variables
 dotenv.config()
@@ -23,6 +24,7 @@ initDatabase()
 
 // Routes
 app.use('/api/auth', authRoutes)
+app.use('/api/pages', pagesRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
