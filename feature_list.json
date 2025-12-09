@@ -143,7 +143,7 @@
       "Step 7: Verify success message",
       "Step 8: Verify page appears in pages list"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

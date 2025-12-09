@@ -19,19 +19,19 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      // TODO: Replace with actual API call
-      // const response = await fetch('/api/auth/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email, password, rememberMe })
-      // })
+      const response = await fetch('http://localhost:3001/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, rememberMe })
+      })
 
-      // Temporary mock login
-      if (email === 'admin@example.com' && password === 'admin123') {
-        localStorage.setItem('token', 'mock-jwt-token')
+      const data = await response.json()
+
+      if (response.ok) {
+        localStorage.setItem('token', data.token)
         navigate('/admin')
       } else {
-        setError('Invalid email or password')
+        setError(data.error || 'Invalid email or password')
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
