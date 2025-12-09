@@ -364,7 +364,7 @@
       "Step 6: Verify numbered list created",
       "Step 7: Save and verify on preview"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
