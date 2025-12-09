@@ -1,7 +1,7 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
-import { Bold, Italic, Underline as UnderlineIcon, List, ListOrdered, Heading1, Heading2, Undo, Redo } from 'lucide-react'
+import { Bold, Italic, Underline as UnderlineIcon, Strikethrough, List, ListOrdered, Heading1, Heading2, Undo, Redo } from 'lucide-react'
 import { Button } from './ui/Button'
 
 export default function RichTextEditor({ content, onChange }) {
@@ -65,6 +65,17 @@ export default function RichTextEditor({ content, onChange }) {
           title="Underline (Ctrl+U)"
         >
           <UnderlineIcon className="w-4 h-4" />
+        </Button>
+
+        {/* Strikethrough */}
+        <Button
+          type="button"
+          variant={editor.isActive('strike') ? 'default' : 'ghost'}
+          size="sm"
+          onClick={() => editor.chain().focus().toggleStrike().run()}
+          title="Strikethrough"
+        >
+          <Strikethrough className="w-4 h-4" />
         </Button>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
