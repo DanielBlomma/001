@@ -5,6 +5,7 @@ import { Input } from '../../components/ui/Input'
 import { Label } from '../../components/ui/Label'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card'
 import { RevisionHistory } from '../../components/RevisionHistory'
+import RichTextEditor from '../../components/RichTextEditor'
 import { ArrowLeft, Save, Eye, History } from 'lucide-react'
 
 export default function PageEditorPage() {
