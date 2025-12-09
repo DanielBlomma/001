@@ -1,4 +1,5 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import {
   LayoutDashboard,
   FileText,
@@ -7,12 +8,36 @@ import {
   Users,
   Settings,
   ExternalLink,
-  LogOut
+  LogOut,
+  User
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default function AdminLayout() {
   const navigate = useNavigate()
+  const [userEmail, setUserEmail] = useState('admin@example.com')
+
+  useEffect(() => {
+    fetchUserInfo()
+  }, [])
+
+  const fetchUserInfo = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch('http://localhost:3001/api/auth/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (response.ok) {
+        const user = await response.json()
+        setUserEmail(user.email || 'admin@example.com')
+      }
+    } catch (error) {
+      console.error('Error fetching user info:', error)
+    }
+  }
 
   const handleLogout = () => {
     // TODO: Clear auth token
@@ -82,9 +107,13 @@ export default function AdminLayout() {
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-semibold">Admin Dashboard</h1>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">
-                admin@example.com
-              </span>
+              <Link
+                to="/admin/profile"
+                className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent text-sm transition-colors"
+              >
+                <User className="h-4 w-4" />
+                <span className="text-muted-foreground">{userEmail}</span>
+              </Link>
             </div>
           </div>
         </header>

@@ -1,16 +1,16 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #6: Password reset request sends email
+## Task #9: User profile update changes saved successfully
 
 **Category:** functional
 
 **Steps:**
-- Step 1: Navigate to /admin/login
-- Step 2: Click 'Forgot password' link
-- Step 3: Enter email address
-- Step 4: Submit form
-- Step 5: Verify success message displayed
-- Step 6: Check that reset email would be sent (console log or mock)
+- Step 1: Login to admin panel
+- Step 2: Navigate to profile settings
+- Step 3: Update name and email
+- Step 4: Save changes
+- Step 5: Verify success message
+- Step 6: Refresh page and verify changes persisted
 
 ---
 

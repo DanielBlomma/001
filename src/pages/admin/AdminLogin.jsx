@@ -106,8 +106,8 @@ export default function AdminLogin() {
           <div className="mt-6 p-4 bg-muted/50 rounded-md">
             <p className="text-xs text-muted-foreground text-center">
               <strong>Demo Credentials:</strong><br />
-              Email: admin@example.com<br />
-              Password: admin123
+              Email: sarah.johnson@example.com<br />
+              Password: (check server logs or reset password)
             </p>
           </div>
         </CardContent>
