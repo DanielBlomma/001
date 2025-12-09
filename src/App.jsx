@@ -7,6 +7,7 @@ import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import PagesListPage from './pages/admin/PagesListPage'
 import PageEditorPage from './pages/admin/PageEditorPage'
+import UsersListPage from './pages/admin/UsersListPage'
 
 function App() {
   return (
@@ -36,10 +37,7 @@ function App() {
             <h1 className="text-2xl font-bold">Menus</h1>
             <p className="text-muted-foreground mt-2">Menu management will be implemented here</p>
           </div>} />
-          <Route path="users" element={<div className="p-6">
-            <h1 className="text-2xl font-bold">Users</h1>
-            <p className="text-muted-foreground mt-2">User management will be implemented here</p>
-          </div>} />
+          <Route path="users" element={<UsersListPage />} />
           <Route path="settings" element={<div className="p-6">
             <h1 className="text-2xl font-bold">Settings</h1>
             <p className="text-muted-foreground mt-2">Settings will be implemented here</p>

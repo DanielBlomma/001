@@ -1,5 +1,11 @@
 <project_specification>
   <project_name>Modern Content Management System</project_name>
+  <repository>
+    <github_repo>DanielBlomma/001</github_repo>
+    <branch_strategy>feature-branches</branch_strategy>
+    <main_branch>main</main_branch>
+  </repository>
+
 
   <overview>
     Build a fully functional, modular Content Management System (CMS) with a beautiful, modern frontend 
