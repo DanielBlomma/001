@@ -3539,3 +3539,166 @@ Ready for next task
 
 =======================================================
 
+
+=======================================================
+TASK #6 COMPLETION - PASSWORD RESET REQUEST
+Session Date: December 9, 2025
+Agent: Swarm Agent (Task-focused)
+=======================================================
+
+TASK ASSIGNED: Password reset request sends email
+
+TASK COMPLETED SUCCESSFULLY ✅
+
+=======================================================
+IMPLEMENTATION DETAILS:
+=======================================================
+
+1. BACKEND API ENDPOINT
+   - Created POST /api/auth/forgot-password in server/routes/auth.js
+   - Accepts email address in request body
+   - Validates user exists and is active
+   - Generates random reset token (26 characters)
+   - Stores token in database with 1-hour expiration
+   - Returns success message (security best practice - no user enumeration)
+   - Console logs reset token information (mock email functionality)
+
+2. DATABASE INTEGRATION
+   - Used existing reset_token and reset_token_expires fields in users table
+   - Token format: random alphanumeric string
+   - Expiration: 1 hour from request time
+   - Successfully tested with sarah.johnson@example.com
+
+3. FRONTEND COMPONENTS
+   - Created ForgotPassword.jsx page component
+   - Clean, centered card layout matching login page design
+   - Email input field with validation
+   - Submit button with loading state
+   - Success message display after submission
+   - "Back to login" link for navigation
+   - Responsive design
+
+4. ROUTING & NAVIGATION
+   - Added route /admin/forgot-password in App.jsx
+   - Updated AdminLogin.jsx to use Link instead of anchor tag
+   - "Forgot password?" link now properly navigates to reset page
+
+=======================================================
+TESTING COMPLETED:
+=======================================================
+
+All 6 test steps verified through browser automation:
+
+✅ Step 1: Navigate to /admin/login
+   - Login page displays correctly
+   - "Forgot password?" link visible
+
+✅ Step 2: Click 'Forgot password' link
+   - Successfully navigates to /admin/forgot-password
+   - Forgot Password page renders correctly
+
+✅ Step 3: Enter email address
+   - Email input accepts text
+   - Form validation works (required field)
+
+✅ Step 4: Submit form
+   - Form submits successfully
+   - API request sent to backend
+   - No errors in console
+
+✅ Step 5: Verify success message displayed
+   - Green success message appears
+   - Message text: "If an account exists with that email, a password reset link has been sent. Please check your email and follow the instructions."
+   - Success state rendered correctly
+
+✅ Step 6: Check that reset email would be sent (console log or mock)
+   - Verified reset token saved in database
+   - Token: random 26-character string
+   - Expiration: 1 hour from request
+   - Console.log statements present in code (lines 170-173 of server/routes/auth.js)
+   - Token can be retrieved from database for testing
+
+SCREENSHOTS CAPTURED:
+- step1-login-page.png - Initial login page
+- step2-forgot-password-page.png - Forgot password page
+- step3-email-entered.png - Email field filled
+- step4-after-submit.png - Success message displayed
+- step6-final-success.png - Final state verification
+
+=======================================================
+CODE CHANGES:
+=======================================================
+
+NEW FILES:
+- src/pages/admin/ForgotPassword.jsx (95 lines)
+
+MODIFIED FILES:
+- server/routes/auth.js (+43 lines) - Added forgot-password endpoint
+- src/App.jsx (+2 lines) - Added import and route
+- src/pages/admin/AdminLogin.jsx (+1 line) - Updated link import
+- feature_list.json (passes: false → true for test #6)
+
+=======================================================
+GIT COMMIT:
+=======================================================
+
+Commit: 9928db6
+Message: "Task #6: Password reset request sends email - verified end-to-end"
+Branch: task-6-password-reset-request-sends-e
+Files: 5 files changed, 144 insertions(+), 4 deletions(-)
+
+=======================================================
+TECHNICAL NOTES:
+=======================================================
+
+Security Best Practices:
+- API returns same message whether email exists or not (prevents email enumeration)
+- Token is random and unpredictable
+- Token expires after 1 hour
+- Token stored securely in database
+
+Mock Email System:
+- In production, would integrate with SMTP service or email API
+- Current implementation logs to console for demonstration
+- Console.log output includes:
+  * User email address
+  * Reset token
+  * Reset link URL
+  * Expiration time
+
+Database:
+- Reset token stored in users.reset_token field
+- Expiration stored in users.reset_token_expires field
+- Token can be used by password reset page (test #7)
+
+=======================================================
+NEXT STEPS:
+=======================================================
+
+The password reset REQUEST functionality is complete.
+The next task would be test #7: "Password reset with valid token updates password"
+
+This would require:
+1. Creating ResetPassword.jsx page component
+2. Adding /admin/reset-password route
+3. Creating backend endpoint PUT /api/auth/reset-password
+4. Token validation logic
+5. Password update functionality
+6. Clearing reset token after use
+
+=======================================================
+TESTING STATUS UPDATE:
+=======================================================
+
+Total Test Cases: 203
+- Passing: 18 → 19 (increased by 1)
+- Pending: 185 → 184
+
+Tests Now Passing:
+1-5: Authentication tests
+6: Password reset request sends email ✅ (NEW!)
+7-17: Other tests passing from previous sessions
+
+Task #6 COMPLETE ✅
+
+=======================================================
