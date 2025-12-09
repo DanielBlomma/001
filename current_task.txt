@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #24: Rich text editor supports hyperlinks
+## Task #25: Rich text editor supports image insertion from media library
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type and select text", "Step 4: Click link button", "Step 5: Enter URL in link dialog", "Step 6: Choose target (_self or _blank)", "Step 7: Save link", "Step 8: Verify link created with href", "Step 9: Preview and test link functionality"]
+["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Click insert image button", "Step 4: Media library modal opens", "Step 5: Select an image", "Step 6: Click insert", "Step 7: Verify image appears in editor", "Step 8: Save and verify image on public page"]
 
 ---
 
