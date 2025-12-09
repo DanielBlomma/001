@@ -158,7 +158,7 @@
       "Step 7: Navigate back to pages list",
       "Step 8: Verify changes reflected"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
