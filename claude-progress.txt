@@ -3853,3 +3853,227 @@ through browser automation. Users can request password resets, and
 the system logs the reset information to console as required.
 
 =======================================================
+
+=======================================================
+TASK #7 COMPLETION - PASSWORD RESET WITH VALID TOKEN
+=======================================================
+
+Date: December 9, 2025
+Agent: Swarm Mode Agent
+Task: Password reset with valid token updates password
+
+SUMMARY:
+Successfully implemented the password reset functionality that allows users
+to reset their password using a valid reset token. The complete flow from
+token generation to password update and login verification is working.
+
+=======================================================
+IMPLEMENTATION DETAILS:
+=======================================================
+
+✅ BACKEND API ENDPOINT:
+- Created POST /api/auth/reset-password endpoint
+- Accepts: { token, newPassword }
+- Validates:
+  * Token exists in database
+  * Token hasn't expired (1 hour expiration)
+  * New password meets minimum length (6+ characters)
+- Security features:
+  * Hashes password with bcrypt (10 rounds)
+  * Clears reset_token and reset_token_expires after use
+  * Returns generic error for invalid/expired tokens
+- Error handling for all edge cases
+
+✅ FRONTEND COMPONENT:
+- Created src/pages/admin/ResetPassword.jsx
+- Features:
+  * Extracts token from URL query parameter (?token=xyz)
+  * Two password input fields (new + confirm)
+  * Client-side validation:
+    - Passwords must match
+    - Minimum 6 characters
+  * Shows clear error messages
+  * Success message on completion
+  * Auto-redirects to login page after 2 seconds
+  * "Back to login" link for navigation
+- Clean, accessible UI matching existing design
+
+✅ ROUTING:
+- Added /admin/reset-password route to App.jsx
+- Imported ResetPassword component
+- Route is public (not behind ProtectedRoute)
+
+✅ DATABASE:
+- Database already had reset_token and reset_token_expires columns
+- Recreated database to ensure schema is current
+- Seed data restored (admin user with default password)
+
+=======================================================
+TESTING VERIFICATION:
+=======================================================
+
+Tested complete end-to-end flow with browser automation:
+
+Step 1: Generate Reset Token
+- Used forgot password flow to generate token
+- Token logged to console: 6srgsoc99ltocmh5bvv2u
+- Expiration set to 1 hour from generation
+✅ VERIFIED
+
+Step 2: Navigate to Reset Page
+- URL: http://localhost:5173/admin/reset-password?token=6srgsoc99ltocmh5bvv2u
+- Page loaded successfully
+- Token extracted from URL query parameter
+- Form displayed with two password fields
+✅ VERIFIED
+
+Step 3: Enter New Password
+- Filled newPassword: "newpassword123"
+- Filled confirmPassword: "newpassword123"
+- Both fields displayed as masked (password type)
+✅ VERIFIED
+
+Step 4: Submit Form
+- Clicked "Reset Password" button
+- API call sent to backend
+- Password hashed and stored in database
+- Reset token cleared from database
+✅ VERIFIED
+
+Step 5: Success Message
+- Success message displayed briefly
+- Auto-redirect initiated to login page
+- User landed on /admin/login
+✅ VERIFIED
+
+Step 6: Login with New Password
+- Entered email: admin@example.com
+- Entered password: newpassword123 (NEW password)
+- Clicked Sign In button
+✅ VERIFIED
+
+Step 7: Verify Login Successful
+- JWT token generated and stored
+- Redirected to /admin dashboard
+- Dashboard displayed correctly
+- User email shown in header: admin@example.com
+✅ VERIFIED
+
+=======================================================
+FILES CREATED/MODIFIED:
+=======================================================
+
+NEW FILES:
+- src/pages/admin/ResetPassword.jsx (148 lines)
+  * Complete password reset form component
+  * URL token extraction
+  * Form validation
+  * API integration
+  * Success handling with redirect
+
+MODIFIED FILES:
+- server/routes/auth.js
+  * Added POST /api/auth/reset-password endpoint (50+ lines)
+  * Token validation logic
+  * Password hashing
+  * Database update to clear token
+
+- src/App.jsx
+  * Added ResetPassword import
+  * Added /admin/reset-password route
+
+- feature_list.json
+  * Marked test #7 as passing (false → true)
+
+- cms.db (recreated)
+  * Fresh database with updated schema
+  * Reset token columns present
+
+=======================================================
+SCREENSHOTS CAPTURED:
+=======================================================
+
+step1-forgot-password-page.png - Initial forgot password page
+step2-email-filled.png - Email entered in form
+step3-reset-link-sent.png - Error (before backend fix)
+step4-success-message.png - Success (after backend fix)
+step5-reset-password-page.png - Reset password form with token
+step6-passwords-entered.png - Both password fields filled
+step7-password-reset-success.png - Auto-redirected to login
+step8-login-with-new-password.png - Logging in with new password
+step9-login-successful.png - Dashboard after successful login
+
+=======================================================
+ISSUES ENCOUNTERED AND RESOLVED:
+=======================================================
+
+Issue #1: Backend Not Starting
+- Problem: Wrong working directory when starting server
+- Cause: Commands run from server/ directory instead of project root
+- Solution: Changed to project root before running node server/index.js
+- Impact: Backend now starts correctly
+
+Issue #2: Database Missing Columns
+- Problem: SqliteError: no such column: reset_token
+- Cause: Database created before schema included reset token columns
+- Solution: Deleted cms.db and recreated with current schema
+- Impact: All password reset functionality now works
+
+Issue #3: Multiple Server Processes
+- Problem: Old server process still running on port 3001
+- Cause: Previous server not killed properly
+- Solution: Killed old process (PID 76898) before starting new one
+- Impact: Backend responds correctly to API calls
+
+=======================================================
+CODE QUALITY:
+=======================================================
+
+✅ Clean, readable code structure
+✅ Proper error handling throughout
+✅ Security best practices followed
+✅ Password hashing with bcrypt
+✅ Token expiration validation
+✅ Client-side and server-side validation
+✅ User-friendly error messages
+✅ Accessible form design
+✅ Consistent with existing codebase patterns
+✅ No console errors or warnings
+
+=======================================================
+TESTING STATUS UPDATE:
+=======================================================
+
+Total Test Cases: 203
+Previously Passing: 18
+Newly Passing: 1 (Test #7)
+Currently Passing: 19 ✅
+Remaining: 184 ⏳
+
+Completion: 9.4% (19/203 tests)
+
+=======================================================
+NEXT STEPS FOR FUTURE AGENTS:
+=======================================================
+
+SUGGESTED NEXT TASKS (from swarm coordinator):
+- Continue with other authentication-related tests
+- Implement additional password reset edge cases
+- Work on other high-priority features
+
+The password reset functionality is complete and working perfectly!
+
+=======================================================
+TASK #7 COMPLETE ✅
+=======================================================
+
+Git commit: 05880b7
+Branch: task-7-password-reset-with-valid-toke
+Files changed: 6
+Lines added: 200+
+Test result: PASSING
+
+All test steps verified with screenshots.
+Code is clean, secure, and ready for production.
+
+=======================================================
