@@ -377,7 +377,7 @@
       "Step 5: Verify bullet list created",
       "Step 6: Save and preview"
     ],
-    "passes": true
+    "passes": false
   },
   {
     "category": "functional",

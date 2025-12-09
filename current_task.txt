@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #23: Rich text editor supports unordered lists
+## Task #24: Rich text editor supports hyperlinks
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Click unordered list button", "Step 4: Type list items", "Step 5: Verify bullet list created", "Step 6: Save and preview"]
+["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type and select text", "Step 4: Click link button", "Step 5: Enter URL in link dialog", "Step 6: Choose target (_self or _blank)", "Step 7: Save link", "Step 8: Verify link created with href", "Step 9: Preview and test link functionality"]
 
 ---
 

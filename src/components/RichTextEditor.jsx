@@ -1,13 +1,18 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
-import { Bold, Italic, Underline as UnderlineIcon, Strikethrough, List, ListOrdered, Heading1, Heading2, Undo, Redo } from 'lucide-react'
+import Link from '@tiptap/extension-link'
+import { Bold, Italic, Underline as UnderlineIcon, Strikethrough, List, ListOrdered, Heading1, Heading2, Undo, Redo, Link as LinkIcon } from 'lucide-react'
 import { Button } from './ui/Button'
 import { useState, useEffect, useRef } from 'react'
 
 export default function RichTextEditor({ content, onChange }) {
   const [showHeadingMenu, setShowHeadingMenu] = useState(false)
+  const [showLinkDialog, setShowLinkDialog] = useState(false)
+  const [linkUrl, setLinkUrl] = useState('')
+  const [linkTarget, setLinkTarget] = useState('_self')
   const headingMenuRef = useRef(null)
+  const linkDialogRef = useRef(null)
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -15,13 +20,16 @@ export default function RichTextEditor({ content, onChange }) {
       if (headingMenuRef.current && !headingMenuRef.current.contains(event.target)) {
         setShowHeadingMenu(false)
       }
+      if (linkDialogRef.current && !linkDialogRef.current.contains(event.target)) {
+        setShowLinkDialog(false)
+      }
     }
 
-    if (showHeadingMenu) {
+    if (showHeadingMenu || showLinkDialog) {
       document.addEventListener('mousedown', handleClickOutside)
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [showHeadingMenu])
+  }, [showHeadingMenu, showLinkDialog])
 
   const editor = useEditor({
     extensions: [
@@ -30,7 +38,13 @@ export default function RichTextEditor({ content, onChange }) {
           levels: [1, 2, 3, 4, 5, 6]
         }
       }),
-      Underline
+      Underline,
+      Link.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          target: '_self',
+        },
+      })
     ],
     content: content || '',
     onUpdate: ({ editor }) => {
@@ -43,6 +57,48 @@ export default function RichTextEditor({ content, onChange }) {
       }
     }
   })
+
+  // Handle link button click
+  const handleLinkClick = () => {
+    const previousUrl = editor.getAttributes('link').href
+    const previousTarget = editor.getAttributes('link').target || '_self'
+
+    if (previousUrl) {
+      setLinkUrl(previousUrl)
+      setLinkTarget(previousTarget)
+    } else {
+      setLinkUrl('')
+      setLinkTarget('_self')
+    }
+
+    setShowLinkDialog(true)
+  }
+
+  // Handle link save
+  const handleLinkSave = () => {
+    if (linkUrl === '') {
+      editor.chain().focus().unsetLink().run()
+    } else {
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .setLink({ href: linkUrl, target: linkTarget })
+        .run()
+    }
+
+    setShowLinkDialog(false)
+    setLinkUrl('')
+    setLinkTarget('_self')
+  }
+
+  // Handle link remove
+  const handleLinkRemove = () => {
+    editor.chain().focus().unsetLink().run()
+    setShowLinkDialog(false)
+    setLinkUrl('')
+    setLinkTarget('_self')
+  }
 
   if (!editor) {
     return null
@@ -95,6 +151,84 @@ export default function RichTextEditor({ content, onChange }) {
         >
           <Strikethrough className="w-4 h-4" />
         </Button>
+
+        <div className="w-px h-6 bg-gray-300 mx-1" />
+
+        {/* Link */}
+        <div className="relative">
+          <Button
+            type="button"
+            variant={editor.isActive('link') ? 'default' : 'ghost'}
+            size="sm"
+            onClick={handleLinkClick}
+            title="Add Link"
+          >
+            <LinkIcon className="w-4 h-4" />
+          </Button>
+
+          {showLinkDialog && (
+            <div
+              ref={linkDialogRef}
+              className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10 p-3 min-w-[300px]"
+            >
+              <div className="mb-2">
+                <label className="block text-xs font-medium text-gray-700 mb-1">
+                  URL
+                </label>
+                <input
+                  type="text"
+                  value={linkUrl}
+                  onChange={(e) => setLinkUrl(e.target.value)}
+                  placeholder="https://example.com"
+                  className="w-full px-2 py-1 text-sm border border-gray-300 rounded"
+                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      handleLinkSave()
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="block text-xs font-medium text-gray-700 mb-1">
+                  Open in
+                </label>
+                <select
+                  value={linkTarget}
+                  onChange={(e) => setLinkTarget(e.target.value)}
+                  className="w-full px-2 py-1 text-sm border border-gray-300 rounded"
+                >
+                  <option value="_self">Same tab</option>
+                  <option value="_blank">New tab</option>
+                </select>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant="default"
+                  size="sm"
+                  onClick={handleLinkSave}
+                  className="flex-1"
+                >
+                  Save
+                </Button>
+                {editor.isActive('link') && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleLinkRemove}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
