@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #21: Rich text editor supports heading levels H1-H6
+## Task #22: Rich text editor supports ordered lists
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type text", "Step 4: Select text", "Step 5: Change to H1 from dropdown", "Step 6: Verify H1 styling applied", "Step 7: Test H2, H3, H4, H5, H6", "Step 8: Verify each heading level renders correctly"]
+["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Click ordered list button", "Step 4: Type list items", "Step 5: Press Enter to create new items", "Step 6: Verify numbered list created", "Step 7: Save and verify on preview"]
 
 ---
 

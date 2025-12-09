@@ -3,13 +3,31 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import { Bold, Italic, Underline as UnderlineIcon, Strikethrough, List, ListOrdered, Heading1, Heading2, Undo, Redo } from 'lucide-react'
 import { Button } from './ui/Button'
+import { useState, useEffect, useRef } from 'react'
 
 export default function RichTextEditor({ content, onChange }) {
+  const [showHeadingMenu, setShowHeadingMenu] = useState(false)
+  const headingMenuRef = useRef(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (headingMenuRef.current && !headingMenuRef.current.contains(event.target)) {
+        setShowHeadingMenu(false)
+      }
+    }
+
+    if (showHeadingMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showHeadingMenu])
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
         heading: {
-          levels: [1, 2, 3]
+          levels: [1, 2, 3, 4, 5, 6]
         }
       }),
       Underline
@@ -80,27 +98,57 @@ export default function RichTextEditor({ content, onChange }) {
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        {/* Heading 1 */}
-        <Button
-          type="button"
-          variant={editor.isActive('heading', { level: 1 }) ? 'default' : 'ghost'}
-          size="sm"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          title="Heading 1"
-        >
-          <Heading1 className="w-4 h-4" />
-        </Button>
+        {/* Heading Dropdown */}
+        <div className="relative" ref={headingMenuRef}>
+          <Button
+            type="button"
+            variant={editor.isActive('heading') ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setShowHeadingMenu(!showHeadingMenu)}
+            title="Heading Levels"
+            className="min-w-[80px] justify-start"
+          >
+            {editor.isActive('heading', { level: 1 }) && 'H1'}
+            {editor.isActive('heading', { level: 2 }) && 'H2'}
+            {editor.isActive('heading', { level: 3 }) && 'H3'}
+            {editor.isActive('heading', { level: 4 }) && 'H4'}
+            {editor.isActive('heading', { level: 5 }) && 'H5'}
+            {editor.isActive('heading', { level: 6 }) && 'H6'}
+            {!editor.isActive('heading') && 'Heading'}
+            <span className="ml-1">▼</span>
+          </Button>
 
-        {/* Heading 2 */}
-        <Button
-          type="button"
-          variant={editor.isActive('heading', { level: 2 }) ? 'default' : 'ghost'}
-          size="sm"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          title="Heading 2"
-        >
-          <Heading2 className="w-4 h-4" />
-        </Button>
+          {showHeadingMenu && (
+            <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10 min-w-[120px]">
+              <button
+                type="button"
+                className="block w-full text-left px-3 py-2 hover:bg-gray-100 text-xs"
+                onClick={() => {
+                  editor.chain().focus().setParagraph().run()
+                  setShowHeadingMenu(false)
+                }}
+              >
+                Normal
+              </button>
+              {[1, 2, 3, 4, 5, 6].map(level => (
+                <button
+                  key={level}
+                  type="button"
+                  className={`block w-full text-left px-3 py-2 hover:bg-gray-100 ${
+                    editor.isActive('heading', { level }) ? 'bg-blue-50 font-bold' : ''
+                  }`}
+                  style={{ fontSize: `${20 - level * 2}px` }}
+                  onClick={() => {
+                    editor.chain().focus().toggleHeading({ level }).run()
+                    setShowHeadingMenu(false)
+                  }}
+                >
+                  Heading {level}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
