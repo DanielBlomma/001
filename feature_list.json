@@ -264,7 +264,7 @@
       "Step 7: Verify each revision shows author",
       "Step 8: Verify ability to view each revision"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

@@ -4,7 +4,8 @@ import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { Label } from '../../components/ui/Label'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card'
-import { ArrowLeft, Save, Eye } from 'lucide-react'
+import { RevisionHistory } from '../../components/RevisionHistory'
+import { ArrowLeft, Save, Eye, History } from 'lucide-react'
 
 export default function PageEditorPage() {
   const navigate = useNavigate()
@@ -15,6 +16,7 @@ export default function PageEditorPage() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [showRevisions, setShowRevisions] = useState(false)
 
   const [formData, setFormData] = useState({
     title: '',
@@ -22,7 +24,8 @@ export default function PageEditorPage() {
     content: '',
     excerpt: '',
     template: 'standard',
-    status: 'draft'
+    status: 'draft',
+    scheduled_at: ''
   })
 
   useEffect(() => {
@@ -42,13 +45,20 @@ export default function PageEditorPage() {
 
       if (response.ok) {
         const data = await response.json()
+        // Format scheduled_at for datetime-local input (YYYY-MM-DDThh:mm)
+        let scheduledAtValue = ''
+        if (data.scheduled_at) {
+          const date = new Date(data.scheduled_at)
+          scheduledAtValue = date.toISOString().slice(0, 16)
+        }
         setFormData({
           title: data.title || '',
           slug: data.slug || '',
           content: data.content || '',
           excerpt: data.excerpt || '',
           template: data.template || 'standard',
-          status: data.status || 'draft'
+          status: data.status || 'draft',
+          scheduled_at: scheduledAtValue
         })
       } else {
         setError('Failed to load page')
@@ -146,6 +156,15 @@ export default function PageEditorPage() {
           </h1>
         </div>
         <div className="flex items-center gap-2">
+          {isEditMode && (
+            <Button
+              variant="outline"
+              onClick={() => setShowRevisions(true)}
+            >
+              <History className="w-4 h-4 mr-2" />
+              Revision History
+            </Button>
+          )}
           <Button
             variant="outline"
             onClick={() => alert('Preview feature coming soon!')}
@@ -273,6 +292,25 @@ export default function PageEditorPage() {
                 </select>
               </div>
 
+              {/* Show scheduled date/time input when status is 'scheduled' */}
+              {formData.status === 'scheduled' && (
+                <div>
+                  <Label htmlFor="scheduled_at">Publish Date & Time</Label>
+                  <input
+                    type="datetime-local"
+                    id="scheduled_at"
+                    name="scheduled_at"
+                    value={formData.scheduled_at}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    Select when this page should be published
+                  </p>
+                </div>
+              )}
+
               <div>
                 <Label htmlFor="template">Template</Label>
                 <select
@@ -292,6 +330,15 @@ export default function PageEditorPage() {
           </Card>
         </div>
       </div>
+
+      {/* Revision History Dialog */}
+      {isEditMode && (
+        <RevisionHistory
+          pageId={id}
+          open={showRevisions}
+          onClose={() => setShowRevisions(false)}
+        />
+      )}
     </div>
   )
 }

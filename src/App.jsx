@@ -3,6 +3,7 @@ import PublicLayout from './components/layouts/PublicLayout'
 import AdminLayout from './components/layouts/AdminLayout'
 import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/public/HomePage'
+import PublicPage from './pages/public/PublicPage'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import PagesListPage from './pages/admin/PagesListPage'
@@ -16,10 +17,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="*" element={<div className="container mx-auto py-12 text-center">
-            <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
-            <p className="text-muted-foreground">This page will be dynamically rendered from CMS content</p>
-          </div>} />
+          <Route path=":slug" element={<PublicPage />} />
         </Route>
 
         {/* Admin Routes */}

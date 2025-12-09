@@ -5,6 +5,7 @@ import { initDatabase } from './models/database.js'
 import authRoutes from './routes/auth.js'
 import pagesRoutes from './routes/pages.js'
 import usersRoutes from './routes/users.js'
+import publicRoutes from './routes/public.js'
 
 // Load environment variables
 dotenv.config()
@@ -27,6 +28,7 @@ initDatabase()
 app.use('/api/auth', authRoutes)
 app.use('/api/pages', pagesRoutes)
 app.use('/api/users', usersRoutes)
+app.use('/api/public', publicRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {

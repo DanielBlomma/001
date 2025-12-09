@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #12: Unpublish page removes from public site
+## Task #15: Page revision history tracks changes
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Find published page", "Step 3: Click 'Unpublish' action", "Step 4: Verify success message", "Step 5: Navigate to public site", "Step 6: Verify page no longer accessible", "Step 7: Return to admin", "Step 8: Verify status changed to 'Draft'"]
+["Step 1: Login to admin panel", "Step 2: Edit a page and save", "Step 3: Make another edit and save", "Step 4: Make a third edit and save", "Step 5: Click 'Revision History' button", "Step 6: Verify list of revisions with timestamps", "Step 7: Verify each revision shows author", "Step 8: Verify ability to view each revision"]
 
 ---
 
