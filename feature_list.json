@@ -1,0 +1,2861 @@
+[
+  {
+    "category": "functional",
+    "description": "Admin login with valid credentials creates JWT session",
+    "steps": [
+      "Step 1: Navigate to /admin/login",
+      "Step 2: Enter valid email and password",
+      "Step 3: Click login button",
+      "Step 4: Verify redirect to admin dashboard",
+      "Step 5: Verify JWT token stored in localStorage/cookie"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Admin login with invalid credentials shows error",
+    "steps": [
+      "Step 1: Navigate to /admin/login",
+      "Step 2: Enter invalid email or password",
+      "Step 3: Click login button",
+      "Step 4: Verify error message displayed",
+      "Step 5: Verify user remains on login page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Remember me checkbox persists session",
+    "steps": [
+      "Step 1: Navigate to /admin/login",
+      "Step 2: Enter valid credentials",
+      "Step 3: Check 'Remember me' checkbox",
+      "Step 4: Click login button",
+      "Step 5: Close and reopen browser",
+      "Step 6: Navigate to /admin",
+      "Step 7: Verify user still logged in"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Logout functionality clears session",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Click logout button in user menu",
+      "Step 3: Verify redirect to login page",
+      "Step 4: Verify JWT token removed",
+      "Step 5: Try accessing /admin directly",
+      "Step 6: Verify redirect to login"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Protected admin routes require authentication",
+    "steps": [
+      "Step 1: Ensure user is logged out",
+      "Step 2: Try accessing /admin/pages directly",
+      "Step 3: Verify redirect to login page",
+      "Step 4: Try accessing /admin/media",
+      "Step 5: Verify redirect to login page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Password reset request sends email",
+    "steps": [
+      "Step 1: Navigate to /admin/login",
+      "Step 2: Click 'Forgot password' link",
+      "Step 3: Enter email address",
+      "Step 4: Submit form",
+      "Step 5: Verify success message displayed",
+      "Step 6: Check that reset email would be sent (console log or mock)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Password reset with valid token updates password",
+    "steps": [
+      "Step 1: Generate password reset token",
+      "Step 2: Navigate to /admin/reset-password?token=TOKEN",
+      "Step 3: Enter new password twice",
+      "Step 4: Submit form",
+      "Step 5: Verify success message",
+      "Step 6: Login with new password",
+      "Step 7: Verify login successful"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Role-based access control prevents unauthorized actions",
+    "steps": [
+      "Step 1: Login as Editor role",
+      "Step 2: Try accessing /admin/users",
+      "Step 3: Verify access denied or hidden",
+      "Step 4: Login as Admin role",
+      "Step 5: Access /admin/users",
+      "Step 6: Verify access granted"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "User profile update changes saved successfully",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to profile settings",
+      "Step 3: Update name and email",
+      "Step 4: Save changes",
+      "Step 5: Verify success message",
+      "Step 6: Refresh page and verify changes persisted"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Change password from profile settings",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to profile settings",
+      "Step 3: Enter current password",
+      "Step 4: Enter new password twice",
+      "Step 5: Save changes",
+      "Step 6: Logout",
+      "Step 7: Login with new password",
+      "Step 8: Verify login successful"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Create new page with basic content",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Click 'New Page' button",
+      "Step 4: Enter page title",
+      "Step 5: Add text content in editor",
+      "Step 6: Click 'Save Draft'",
+      "Step 7: Verify success message",
+      "Step 8: Verify page appears in pages list"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Edit existing page updates content",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Click edit on existing page",
+      "Step 4: Modify page title and content",
+      "Step 5: Click 'Save Draft'",
+      "Step 6: Verify success message",
+      "Step 7: Navigate back to pages list",
+      "Step 8: Verify changes reflected"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Delete page with confirmation removes from database",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Click delete on a page",
+      "Step 4: Confirm deletion in modal",
+      "Step 5: Verify success message",
+      "Step 6: Verify page removed from list",
+      "Step 7: Try accessing deleted page by ID",
+      "Step 8: Verify 404 error"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Duplicate page creates copy with '(Copy)' suffix",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Click duplicate on a page",
+      "Step 4: Verify success message",
+      "Step 5: Verify duplicated page appears in list",
+      "Step 6: Verify title includes '(Copy)'",
+      "Step 7: Open duplicated page",
+      "Step 8: Verify content matches original"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Publish draft page makes it visible on public site",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Create new page with content",
+      "Step 3: Save as draft",
+      "Step 4: Verify public site doesn't show page",
+      "Step 5: Click 'Publish' button",
+      "Step 6: Verify success message",
+      "Step 7: Navigate to public site",
+      "Step 8: Verify page is now visible",
+      "Step 9: Verify published_at timestamp set"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Unpublish page removes from public site",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Find published page",
+      "Step 3: Click 'Unpublish' action",
+      "Step 4: Verify success message",
+      "Step 5: Navigate to public site",
+      "Step 6: Verify page no longer accessible",
+      "Step 7: Return to admin",
+      "Step 8: Verify status changed to 'Draft'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Schedule page for future publishing",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Create or edit page",
+      "Step 3: Select 'Scheduled' status",
+      "Step 4: Set future date and time",
+      "Step 5: Save page",
+      "Step 6: Verify scheduled_at timestamp saved",
+      "Step 7: Verify public site doesn't show page yet",
+      "Step 8: Verify status badge shows 'Scheduled'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Auto-save draft every 30 seconds preserves content",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Start editing a page",
+      "Step 3: Add content to editor",
+      "Step 4: Wait 30 seconds without saving",
+      "Step 5: Verify auto-save indicator appears",
+      "Step 6: Refresh page",
+      "Step 7: Verify content was preserved",
+      "Step 8: Verify no data loss"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Page revision history tracks changes",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit a page and save",
+      "Step 3: Make another edit and save",
+      "Step 4: Make a third edit and save",
+      "Step 5: Click 'Revision History' button",
+      "Step 6: Verify list of revisions with timestamps",
+      "Step 7: Verify each revision shows author",
+      "Step 8: Verify ability to view each revision"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Restore previous revision replaces current content",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Create page with initial content 'Version 1'",
+      "Step 3: Edit to 'Version 2' and save",
+      "Step 4: Edit to 'Version 3' and save",
+      "Step 5: Open revision history",
+      "Step 6: Select Version 1",
+      "Step 7: Click 'Restore' button",
+      "Step 8: Verify content reverted to 'Version 1'",
+      "Step 9: Verify new revision created for restore"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports bold formatting",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text in editor",
+      "Step 4: Select text",
+      "Step 5: Click bold button",
+      "Step 6: Verify text appears bold in editor",
+      "Step 7: Save and preview",
+      "Step 8: Verify bold formatting preserved"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports italic formatting",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text",
+      "Step 4: Select text",
+      "Step 5: Click italic button",
+      "Step 6: Verify italic style applied",
+      "Step 7: Save and verify on public site"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports underline formatting",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text",
+      "Step 4: Select text",
+      "Step 5: Click underline button",
+      "Step 6: Verify underline applied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports strikethrough formatting",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text",
+      "Step 4: Select text",
+      "Step 5: Click strikethrough button",
+      "Step 6: Verify strikethrough applied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports heading levels H1-H6",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text",
+      "Step 4: Select text",
+      "Step 5: Change to H1 from dropdown",
+      "Step 6: Verify H1 styling applied",
+      "Step 7: Test H2, H3, H4, H5, H6",
+      "Step 8: Verify each heading level renders correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports ordered lists",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Click ordered list button",
+      "Step 4: Type list items",
+      "Step 5: Press Enter to create new items",
+      "Step 6: Verify numbered list created",
+      "Step 7: Save and verify on preview"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports unordered lists",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Click unordered list button",
+      "Step 4: Type list items",
+      "Step 5: Verify bullet list created",
+      "Step 6: Save and preview"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports hyperlinks",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type and select text",
+      "Step 4: Click link button",
+      "Step 5: Enter URL in link dialog",
+      "Step 6: Choose target (_self or _blank)",
+      "Step 7: Save link",
+      "Step 8: Verify link created with href",
+      "Step 9: Preview and test link functionality"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports image insertion from media library",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Click insert image button",
+      "Step 4: Media library modal opens",
+      "Step 5: Select an image",
+      "Step 6: Click insert",
+      "Step 7: Verify image appears in editor",
+      "Step 8: Save and verify image on public page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports video embeds (YouTube)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Click video embed button",
+      "Step 4: Enter YouTube URL",
+      "Step 5: Insert embed",
+      "Step 6: Verify video preview in editor",
+      "Step 7: Save and test video on public page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports code blocks",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Click code block button",
+      "Step 4: Enter code",
+      "Step 5: Verify monospace font applied",
+      "Step 6: Save and verify code formatting preserved"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports blockquotes",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text",
+      "Step 4: Click blockquote button",
+      "Step 5: Verify blockquote styling applied",
+      "Step 6: Save and preview"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports horizontal rules",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Click horizontal rule button",
+      "Step 4: Verify HR line inserted",
+      "Step 5: Save and verify on public page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports text alignment (left, center, right)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text",
+      "Step 4: Select text",
+      "Step 5: Click align center",
+      "Step 6: Verify text centered",
+      "Step 7: Test align right and left",
+      "Step 8: Save and verify alignment preserved"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor undo/redo functionality works",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Type text",
+      "Step 4: Make formatting changes",
+      "Step 5: Click undo button",
+      "Step 6: Verify last change reverted",
+      "Step 7: Click redo button",
+      "Step 8: Verify change reapplied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Rich text editor supports tables",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to page editor",
+      "Step 3: Click insert table button",
+      "Step 4: Specify rows and columns",
+      "Step 5: Insert table",
+      "Step 6: Fill in table cells",
+      "Step 7: Save and preview table"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Preview draft page shows accurate representation",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Create page with formatted content",
+      "Step 3: Add images and modules",
+      "Step 4: Save as draft",
+      "Step 5: Click 'Preview' button",
+      "Step 6: Verify preview opens in new tab or modal",
+      "Step 7: Verify all content renders correctly",
+      "Step 8: Verify formatting matches editor",
+      "Step 9: Verify images display properly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Preview responsive modes (mobile, tablet, desktop)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open page preview",
+      "Step 3: Click mobile view button",
+      "Step 4: Verify layout adjusts to mobile width",
+      "Step 5: Click tablet view button",
+      "Step 6: Verify layout adjusts to tablet width",
+      "Step 7: Click desktop view button",
+      "Step 8: Verify full desktop layout"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Live preview panel updates as editor changes",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open page editor with live preview",
+      "Step 3: Enable side-by-side preview mode",
+      "Step 4: Type content in editor",
+      "Step 5: Verify preview updates in real-time",
+      "Step 6: Add formatting",
+      "Step 7: Verify preview reflects changes immediately"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Share preview link with stakeholders generates token",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open draft page",
+      "Step 3: Click 'Share Preview' button",
+      "Step 4: Verify preview URL generated with token",
+      "Step 5: Copy URL",
+      "Step 6: Open in incognito/private window",
+      "Step 7: Verify page loads without authentication",
+      "Step 8: Verify token has reasonable expiration"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add hero module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Create or edit page",
+      "Step 3: Click 'Add Module' button",
+      "Step 4: Select 'Hero' module type",
+      "Step 5: Enter headline and subtext",
+      "Step 6: Upload background image",
+      "Step 7: Add CTA buttons",
+      "Step 8: Save page",
+      "Step 9: Preview and verify hero displays correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add text block module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Click 'Add Module'",
+      "Step 4: Select 'Text Block'",
+      "Step 5: Enter content in rich text editor",
+      "Step 6: Save",
+      "Step 7: Preview and verify text block renders"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add image gallery module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Add 'Image Gallery' module",
+      "Step 4: Click 'Add Images'",
+      "Step 5: Select multiple images from media library",
+      "Step 6: Set gallery layout (grid/carousel)",
+      "Step 7: Save",
+      "Step 8: Preview gallery functionality"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add CTA (Call-to-Action) module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Add 'CTA' module",
+      "Step 4: Enter headline and description",
+      "Step 5: Add button text and URL",
+      "Step 6: Choose button style",
+      "Step 7: Save and preview"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add testimonials module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Add 'Testimonials' module",
+      "Step 4: Add testimonial entries",
+      "Step 5: Enter quote, author name, photo",
+      "Step 6: Add multiple testimonials",
+      "Step 7: Save",
+      "Step 8: Preview carousel/grid display"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add FAQ accordion module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Add 'FAQ' module",
+      "Step 4: Add FAQ items with questions and answers",
+      "Step 5: Reorder FAQ items",
+      "Step 6: Save",
+      "Step 7: Preview accordion functionality",
+      "Step 8: Test expand/collapse behavior"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add contact form module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Add 'Contact Form' module",
+      "Step 4: Configure form fields",
+      "Step 5: Set recipient email",
+      "Step 6: Save",
+      "Step 7: Test form submission on public page",
+      "Step 8: Verify submission appears in admin"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add video embed module to page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Add 'Video' module",
+      "Step 4: Enter YouTube or Vimeo URL",
+      "Step 5: Set video options (autoplay, controls)",
+      "Step 6: Save",
+      "Step 7: Preview video embed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Drag and drop to reorder modules on page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page with multiple modules",
+      "Step 3: Click and hold drag handle on module",
+      "Step 4: Drag module to new position",
+      "Step 5: Release to drop",
+      "Step 6: Verify module order changed",
+      "Step 7: Save page",
+      "Step 8: Preview and verify new order on public page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Delete module from page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page with modules",
+      "Step 3: Click delete button on module",
+      "Step 4: Confirm deletion",
+      "Step 5: Verify module removed from editor",
+      "Step 6: Save page",
+      "Step 7: Verify module gone from public page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Toggle module visibility without deleting",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page with modules",
+      "Step 3: Click visibility toggle on module",
+      "Step 4: Verify module marked as hidden",
+      "Step 5: Save page",
+      "Step 6: Preview and verify hidden module not displayed",
+      "Step 7: Toggle visibility back on",
+      "Step 8: Verify module visible again"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Customize module settings (styling, layout)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page with module",
+      "Step 3: Click module settings icon",
+      "Step 4: Change background color",
+      "Step 5: Adjust padding/spacing",
+      "Step 6: Change layout option",
+      "Step 7: Save settings",
+      "Step 8: Preview and verify styling applied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Upload single image to media library",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Click upload button or drag file",
+      "Step 4: Select image file (JPG)",
+      "Step 5: Verify upload progress indicator",
+      "Step 6: Verify image appears in library",
+      "Step 7: Verify thumbnail generated",
+      "Step 8: Click image to view details"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Upload multiple images at once",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Select multiple image files",
+      "Step 4: Upload all at once",
+      "Step 5: Verify all files uploaded",
+      "Step 6: Verify all thumbnails generated"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Drag and drop file upload to media library",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Drag image file from desktop",
+      "Step 4: Drop onto upload dropzone",
+      "Step 5: Verify upload starts",
+      "Step 6: Verify file appears in library"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Upload PDF document to media library",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Upload PDF file",
+      "Step 4: Verify PDF uploaded",
+      "Step 5: Verify PDF icon/thumbnail shown",
+      "Step 6: Click to view details"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Upload various image formats (PNG, GIF, WebP, SVG)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Upload PNG file",
+      "Step 4: Upload GIF file",
+      "Step 5: Upload WebP file",
+      "Step 6: Upload SVG file",
+      "Step 7: Verify all formats uploaded successfully",
+      "Step 8: Verify appropriate previews shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Automatic image optimization on upload",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Upload large unoptimized image (>5MB)",
+      "Step 4: Verify upload completes",
+      "Step 5: Check file details",
+      "Step 6: Verify file size reduced",
+      "Step 7: Verify image quality maintained",
+      "Step 8: Verify dimensions preserved or scaled appropriately"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Create folder in media library",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Click 'New Folder' button",
+      "Step 4: Enter folder name",
+      "Step 5: Create folder",
+      "Step 6: Verify folder appears in folder tree",
+      "Step 7: Click folder to view contents"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Organize media files into folders",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Create folder 'Photos'",
+      "Step 4: Drag images into folder",
+      "Step 5: Verify images moved to folder",
+      "Step 6: Navigate to folder",
+      "Step 7: Verify images displayed in folder"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Search media by filename",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Enter search term in search box",
+      "Step 4: Verify filtered results shown",
+      "Step 5: Clear search",
+      "Step 6: Verify all media shown again"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Filter media by file type",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Select 'Images' filter",
+      "Step 4: Verify only images shown",
+      "Step 5: Select 'Documents' filter",
+      "Step 6: Verify only documents shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Filter media by upload date",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Apply date range filter",
+      "Step 4: Verify only media from date range shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Delete media file from library",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Select media file",
+      "Step 4: Click delete button",
+      "Step 5: Confirm deletion",
+      "Step 6: Verify file removed from library",
+      "Step 7: Verify file deleted from server storage"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Edit image alt text",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Click on image",
+      "Step 4: Enter alt text in detail panel",
+      "Step 5: Save changes",
+      "Step 6: Verify alt text saved",
+      "Step 7: Use image in page",
+      "Step 8: Verify alt text appears in img tag"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add caption to image",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Select image",
+      "Step 4: Add caption text",
+      "Step 5: Save",
+      "Step 6: Verify caption saved",
+      "Step 7: Use image in page",
+      "Step 8: Verify caption displays below image"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "View media usage tracking (where used)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Select image used in multiple pages",
+      "Step 4: View usage details",
+      "Step 5: Verify list of pages using this image",
+      "Step 6: Click page link",
+      "Step 7: Verify navigates to that page editor"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Prevent deletion of media in use with warning",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Try to delete image used in pages",
+      "Step 4: Verify warning shown",
+      "Step 5: Verify list of pages using image",
+      "Step 6: Cancel or confirm with understanding"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Toggle between grid and list view in media library",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Click grid view button",
+      "Step 4: Verify images shown in grid with thumbnails",
+      "Step 5: Click list view button",
+      "Step 6: Verify media shown in list with details"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Edit page SEO title",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel in sidebar",
+      "Step 4: Enter custom SEO title",
+      "Step 5: Save page",
+      "Step 6: View page source on public site",
+      "Step 7: Verify <title> tag has custom title"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Edit page meta description",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel",
+      "Step 4: Enter meta description",
+      "Step 5: Verify character count shown",
+      "Step 6: Save page",
+      "Step 7: View page source",
+      "Step 8: Verify meta description tag present"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Configure Open Graph tags for social sharing",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel",
+      "Step 4: Enter OG title",
+      "Step 5: Enter OG description",
+      "Step 6: Upload OG image",
+      "Step 7: Save page",
+      "Step 8: View page source",
+      "Step 9: Verify og:title, og:description, og:image tags"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Configure Twitter Card tags",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel",
+      "Step 4: Configure Twitter card type",
+      "Step 5: Enter Twitter title and description",
+      "Step 6: Save page",
+      "Step 7: View page source",
+      "Step 8: Verify twitter:card tags present"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Set canonical URL for page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel",
+      "Step 4: Enter canonical URL",
+      "Step 5: Save page",
+      "Step 6: View page source",
+      "Step 7: Verify <link rel='canonical'> tag present"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Configure robots meta tags (index/noindex)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel",
+      "Step 4: Set robots to 'noindex, nofollow'",
+      "Step 5: Save page",
+      "Step 6: View page source",
+      "Step 7: Verify robots meta tag present"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Generate XML sitemap automatically",
+    "steps": [
+      "Step 1: Publish several pages",
+      "Step 2: Navigate to /sitemap.xml",
+      "Step 3: Verify XML sitemap loads",
+      "Step 4: Verify all published pages listed",
+      "Step 5: Verify draft pages not included",
+      "Step 6: Verify proper XML format"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "SEO score and recommendations shown",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel",
+      "Step 4: Verify SEO score displayed",
+      "Step 5: Verify recommendations listed",
+      "Step 6: Make suggested improvements",
+      "Step 7: Verify score updates"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Preview how page appears in search results",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Edit page",
+      "Step 3: Open SEO panel",
+      "Step 4: Verify search preview shown",
+      "Step 5: Verify title, URL, description display",
+      "Step 6: Edit meta data",
+      "Step 7: Verify preview updates"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Edit page URL slug",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Create or edit page",
+      "Step 3: Enter page title",
+      "Step 4: Verify slug auto-generated",
+      "Step 5: Manually edit slug",
+      "Step 6: Save page",
+      "Step 7: Verify page accessible at /custom-slug"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Slug validation prevents duplicates",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Create page with slug 'about'",
+      "Step 3: Create another page",
+      "Step 4: Try to use slug 'about'",
+      "Step 5: Verify error message shown",
+      "Step 6: Verify cannot save with duplicate slug"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Create navigation menu",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Menus",
+      "Step 3: Click 'Create Menu'",
+      "Step 4: Enter menu name 'Main Navigation'",
+      "Step 5: Select location 'Header'",
+      "Step 6: Save menu",
+      "Step 7: Verify menu created"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add page to navigation menu",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open menu editor",
+      "Step 3: Click 'Add Item'",
+      "Step 4: Select 'Page' type",
+      "Step 5: Choose page from dropdown",
+      "Step 6: Add to menu",
+      "Step 7: Verify page appears in menu tree",
+      "Step 8: Save menu"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add custom link to navigation menu",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open menu editor",
+      "Step 3: Click 'Add Item'",
+      "Step 4: Select 'Custom Link'",
+      "Step 5: Enter label and URL",
+      "Step 6: Add to menu",
+      "Step 7: Save",
+      "Step 8: Verify link appears in public menu"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Drag and drop to reorder menu items",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open menu editor with multiple items",
+      "Step 3: Drag menu item to new position",
+      "Step 4: Release to drop",
+      "Step 5: Verify order changed",
+      "Step 6: Save menu",
+      "Step 7: Check public site",
+      "Step 8: Verify new order reflected"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Create nested multi-level menu",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open menu editor",
+      "Step 3: Add parent menu item",
+      "Step 4: Add child items",
+      "Step 5: Drag child items to nest under parent",
+      "Step 6: Verify indentation shows hierarchy",
+      "Step 7: Save menu",
+      "Step 8: Check public site for dropdown submenu"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Toggle menu item visibility",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open menu editor",
+      "Step 3: Click visibility toggle on menu item",
+      "Step 4: Verify item marked as hidden",
+      "Step 5: Save menu",
+      "Step 6: Check public site",
+      "Step 7: Verify hidden item not displayed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Delete menu item",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open menu editor",
+      "Step 3: Click delete on menu item",
+      "Step 4: Confirm deletion",
+      "Step 5: Verify item removed from tree",
+      "Step 6: Save menu",
+      "Step 7: Verify item gone from public site"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Set menu item target (_blank for new window)",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Open menu editor",
+      "Step 3: Edit menu item settings",
+      "Step 4: Set target to '_blank'",
+      "Step 5: Save menu",
+      "Step 6: Check public site",
+      "Step 7: Click link",
+      "Step 8: Verify opens in new tab"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Create admin user account",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: Click 'Add User'",
+      "Step 4: Enter name, email, password",
+      "Step 5: Select role 'Admin'",
+      "Step 6: Save user",
+      "Step 7: Verify user appears in list",
+      "Step 8: Logout and login as new user",
+      "Step 9: Verify admin access granted"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Create editor user account",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: Create new user",
+      "Step 4: Select role 'Editor'",
+      "Step 5: Save",
+      "Step 6: Login as editor",
+      "Step 7: Verify can edit content",
+      "Step 8: Verify cannot access user management"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Create viewer user account with read-only access",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Create user with 'Viewer' role",
+      "Step 3: Save",
+      "Step 4: Login as viewer",
+      "Step 5: Verify can view admin panel",
+      "Step 6: Verify cannot edit or create content"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Edit user profile information",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: Click edit on user",
+      "Step 4: Change name and email",
+      "Step 5: Save changes",
+      "Step 6: Verify changes saved",
+      "Step 7: Verify user can login with new email"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Change user role and permissions",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: Edit user",
+      "Step 4: Change role from Editor to Admin",
+      "Step 5: Save",
+      "Step 6: Login as that user",
+      "Step 7: Verify new permissions active"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Deactivate user account",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: Click deactivate on user",
+      "Step 4: Confirm deactivation",
+      "Step 5: Verify user marked as inactive",
+      "Step 6: Logout",
+      "Step 7: Try to login as deactivated user",
+      "Step 8: Verify login denied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "View user activity log",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: View user details",
+      "Step 4: Check activity log section",
+      "Step 5: Verify recent actions listed",
+      "Step 6: Verify timestamps shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Admin can reset user password",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: Edit user",
+      "Step 4: Click 'Reset Password'",
+      "Step 5: Verify reset link generated/email sent",
+      "Step 6: User receives reset instructions"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Upload user avatar",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Go to profile settings",
+      "Step 3: Click upload avatar",
+      "Step 4: Select image file",
+      "Step 5: Crop image if needed",
+      "Step 6: Save",
+      "Step 7: Verify avatar shown in user menu",
+      "Step 8: Verify avatar shown on content authored by user"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Update site title in settings",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > General",
+      "Step 3: Change site title",
+      "Step 4: Save settings",
+      "Step 5: Visit public site",
+      "Step 6: Verify new title in browser tab",
+      "Step 7: Verify title in header"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Update site tagline",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > General",
+      "Step 3: Enter tagline",
+      "Step 4: Save",
+      "Step 5: Check public site",
+      "Step 6: Verify tagline displayed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Upload site logo",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > Branding",
+      "Step 3: Click upload logo",
+      "Step 4: Select logo file",
+      "Step 5: Save",
+      "Step 6: Check public site header",
+      "Step 7: Verify logo displayed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Upload favicon",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > Branding",
+      "Step 3: Upload favicon (ICO or PNG)",
+      "Step 4: Save",
+      "Step 5: Refresh public site",
+      "Step 6: Verify favicon in browser tab"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Configure contact information in settings",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > Contact",
+      "Step 3: Enter address, phone, email",
+      "Step 4: Save",
+      "Step 5: Check public site footer",
+      "Step 6: Verify contact info displayed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add social media links in settings",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > Social",
+      "Step 3: Enter Facebook, Twitter, Instagram URLs",
+      "Step 4: Save",
+      "Step 5: Check public site footer",
+      "Step 6: Verify social icons with links"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add Google Analytics tracking ID",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > SEO",
+      "Step 3: Enter GA tracking ID",
+      "Step 4: Save",
+      "Step 5: View public site source",
+      "Step 6: Verify GA script included"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add custom CSS to site",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > Advanced",
+      "Step 3: Enter custom CSS code",
+      "Step 4: Save",
+      "Step 5: Check public site",
+      "Step 6: Verify custom styles applied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Add custom JavaScript to site",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > Advanced",
+      "Step 3: Enter custom JS code",
+      "Step 4: Save",
+      "Step 5: Check public site",
+      "Step 6: Verify script executes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Enable maintenance mode",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings",
+      "Step 3: Toggle maintenance mode ON",
+      "Step 4: Save",
+      "Step 5: Logout and visit public site",
+      "Step 6: Verify maintenance page shown",
+      "Step 7: Login to admin",
+      "Step 8: Verify admin still accessible"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Configure email SMTP settings",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Settings > Email",
+      "Step 3: Enter SMTP host, port, username, password",
+      "Step 4: Save",
+      "Step 5: Send test email",
+      "Step 6: Verify email sent successfully"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Dashboard displays overview statistics",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: View dashboard",
+      "Step 3: Verify total pages count shown",
+      "Step 4: Verify total media count",
+      "Step 5: Verify user count",
+      "Step 6: Verify recent activity feed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Dashboard shows quick actions panel",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: View dashboard",
+      "Step 3: Verify 'New Page' quick action",
+      "Step 4: Verify 'Upload Media' quick action",
+      "Step 5: Click quick action",
+      "Step 6: Verify navigates to correct page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Dashboard displays recent content activity",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: View dashboard",
+      "Step 3: Check recent activity feed",
+      "Step 4: Verify recent page edits listed",
+      "Step 5: Verify author and timestamp shown",
+      "Step 6: Click activity item",
+      "Step 7: Verify navigates to that content"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Dashboard shows recent contact submissions",
+    "steps": [
+      "Step 1: Submit contact form on public site",
+      "Step 2: Login to admin",
+      "Step 3: View dashboard",
+      "Step 4: Verify contact submission in recent list",
+      "Step 5: Click to view full submission"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "View contact form submissions list",
+    "steps": [
+      "Step 1: Submit several contact forms",
+      "Step 2: Login to admin",
+      "Step 3: Navigate to contact submissions",
+      "Step 4: Verify all submissions listed",
+      "Step 5: Verify name, email, subject shown",
+      "Step 6: Verify read/unread status"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Mark contact submission as read",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: View contact submissions",
+      "Step 3: Click on unread submission",
+      "Step 4: Verify marked as read",
+      "Step 5: Verify visual indicator changes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Contact form validation requires all fields",
+    "steps": [
+      "Step 1: Navigate to contact page on public site",
+      "Step 2: Try submitting empty form",
+      "Step 3: Verify validation errors shown",
+      "Step 4: Fill in name only",
+      "Step 5: Submit",
+      "Step 6: Verify other fields show errors",
+      "Step 7: Fill all required fields",
+      "Step 8: Verify submission succeeds"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Contact form email validation",
+    "steps": [
+      "Step 1: Navigate to contact form",
+      "Step 2: Enter invalid email format",
+      "Step 3: Submit",
+      "Step 4: Verify email validation error",
+      "Step 5: Enter valid email",
+      "Step 6: Verify validation passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Public homepage loads and displays hero section",
+    "steps": [
+      "Step 1: Navigate to public site root URL",
+      "Step 2: Verify homepage loads",
+      "Step 3: Verify hero section visible",
+      "Step 4: Verify headline and subtext present",
+      "Step 5: Verify CTA buttons functional"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Public navigation menu renders with links",
+    "steps": [
+      "Step 1: Navigate to public site",
+      "Step 2: Verify navigation menu in header",
+      "Step 3: Verify menu items display",
+      "Step 4: Click menu item",
+      "Step 5: Verify navigates to correct page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Public footer displays with social links",
+    "steps": [
+      "Step 1: Navigate to public site",
+      "Step 2: Scroll to footer",
+      "Step 3: Verify footer content displays",
+      "Step 4: Verify social media icons present",
+      "Step 5: Verify copyright notice",
+      "Step 6: Click social link",
+      "Step 7: Verify opens correct URL"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Dynamic page renders from CMS content",
+    "steps": [
+      "Step 1: Create and publish page in admin",
+      "Step 2: Navigate to page slug on public site",
+      "Step 3: Verify page loads",
+      "Step 4: Verify title displays",
+      "Step 5: Verify content renders correctly",
+      "Step 6: Verify all modules display in order"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Blog listing page shows published posts",
+    "steps": [
+      "Step 1: Create multiple blog posts in admin",
+      "Step 2: Publish posts",
+      "Step 3: Navigate to /blog on public site",
+      "Step 4: Verify blog listing displays",
+      "Step 5: Verify posts shown in grid/list",
+      "Step 6: Verify thumbnails, titles, excerpts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Blog post pagination works",
+    "steps": [
+      "Step 1: Create 15+ blog posts",
+      "Step 2: Navigate to blog listing",
+      "Step 3: Verify pagination controls shown",
+      "Step 4: Click next page",
+      "Step 5: Verify next posts load",
+      "Step 6: Verify URL updates with page parameter",
+      "Step 7: Click previous",
+      "Step 8: Verify returns to previous page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Individual blog post page displays correctly",
+    "steps": [
+      "Step 1: Create blog post with featured image",
+      "Step 2: Publish post",
+      "Step 3: Navigate to post on public site",
+      "Step 4: Verify featured image displays",
+      "Step 5: Verify title, date, author shown",
+      "Step 6: Verify content formatted correctly",
+      "Step 7: Verify share buttons present"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Related posts shown on blog post page",
+    "steps": [
+      "Step 1: Create multiple related blog posts",
+      "Step 2: View single post",
+      "Step 3: Scroll to bottom",
+      "Step 4: Verify 'Related Posts' section",
+      "Step 5: Verify related posts displayed",
+      "Step 6: Click related post",
+      "Step 7: Verify navigates to that post"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Page template selection affects layout",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Create page",
+      "Step 3: Select 'Homepage' template",
+      "Step 4: Save and preview",
+      "Step 5: Verify homepage layout",
+      "Step 6: Change to 'Blog Post' template",
+      "Step 7: Verify different layout applied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Parent-child page hierarchy works",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Create parent page 'Services'",
+      "Step 3: Create child page 'Web Design'",
+      "Step 4: Set parent to 'Services'",
+      "Step 5: Save",
+      "Step 6: Verify URL is /services/web-design",
+      "Step 7: Verify breadcrumb navigation"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Page sort order controls display sequence",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Create 3 pages with different sort_order values",
+      "Step 3: Assign sort_order: 3, 1, 2",
+      "Step 4: View pages list",
+      "Step 5: Verify pages sorted correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Search functionality filters pages list",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Enter search term",
+      "Step 4: Verify filtered results",
+      "Step 5: Clear search",
+      "Step 6: Verify all pages shown again"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Filter pages by status (draft, published, scheduled)",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Select 'Draft' filter",
+      "Step 4: Verify only drafts shown",
+      "Step 5: Select 'Published' filter",
+      "Step 6: Verify only published pages shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Filter pages by template type",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Select template filter 'Blog Post'",
+      "Step 4: Verify only blog post pages shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Bulk publish multiple pages at once",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Select multiple draft pages",
+      "Step 4: Click 'Bulk Actions' > 'Publish'",
+      "Step 5: Confirm action",
+      "Step 6: Verify all selected pages published",
+      "Step 7: Verify status badges updated"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Bulk unpublish multiple pages",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Select multiple published pages",
+      "Step 3: Bulk action: Unpublish",
+      "Step 4: Verify all unpublished"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Bulk delete multiple pages with confirmation",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Select multiple pages",
+      "Step 3: Bulk action: Delete",
+      "Step 4: Confirm deletion in modal",
+      "Step 5: Verify all pages deleted"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Pages list pagination works correctly",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Pages list with 50+ pages",
+      "Step 3: Verify pagination controls",
+      "Step 4: Click next page",
+      "Step 5: Verify next set of pages loads",
+      "Step 6: Verify page numbers update"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Set featured image for page",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Edit page",
+      "Step 3: Click 'Set Featured Image' in sidebar",
+      "Step 4: Select image from media library",
+      "Step 5: Save page",
+      "Step 6: Preview page",
+      "Step 7: Verify featured image displays prominently"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Remove featured image from page",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Edit page with featured image",
+      "Step 3: Click 'Remove Featured Image'",
+      "Step 4: Save page",
+      "Step 5: Preview",
+      "Step 6: Verify no featured image shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Admin sidebar navigation is functional",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Verify sidebar with navigation items",
+      "Step 3: Click 'Pages'",
+      "Step 4: Verify navigates to pages list",
+      "Step 5: Click 'Media Library'",
+      "Step 6: Verify navigates to media",
+      "Step 7: Test all sidebar links"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Admin sidebar collapse toggle works",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Click collapse button on sidebar",
+      "Step 3: Verify sidebar collapses to icons only",
+      "Step 4: Verify content area expands",
+      "Step 5: Click expand button",
+      "Step 6: Verify sidebar expands with labels"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Breadcrumb navigation shows current location",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Navigate to Pages > Edit Page",
+      "Step 3: Verify breadcrumb shows: Dashboard > Pages > Edit",
+      "Step 4: Click 'Pages' in breadcrumb",
+      "Step 5: Verify navigates back to pages list"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "User menu in header shows profile options",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Click user avatar/name in header",
+      "Step 3: Verify dropdown menu appears",
+      "Step 4: Verify 'Profile' option",
+      "Step 5: Verify 'Settings' option",
+      "Step 6: Verify 'Logout' option"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "View site link opens public site in new tab",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Click 'View Site' in sidebar",
+      "Step 3: Verify public site opens in new tab",
+      "Step 4: Verify admin tab still open"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Image crop tool in media library",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Select image",
+      "Step 4: Click 'Edit' or 'Crop'",
+      "Step 5: Use crop tool to select area",
+      "Step 6: Save cropped version",
+      "Step 7: Verify cropped image saved"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Last modified timestamp shown on pages",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Verify 'Modified' column shows timestamps",
+      "Step 4: Edit a page and save",
+      "Step 5: Return to list",
+      "Step 6: Verify timestamp updated"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Author attribution shown on pages",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: View pages list",
+      "Step 3: Verify 'Author' column shows usernames",
+      "Step 4: Create page",
+      "Step 5: Verify author set to current user",
+      "Step 6: View page on public site",
+      "Step 7: Verify author byline if applicable"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "JWT token expires after reasonable time",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Note JWT token expiration time",
+      "Step 3: Wait until past expiration",
+      "Step 4: Try to perform admin action",
+      "Step 5: Verify prompted to login again",
+      "Step 6: Verify session properly ended"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "API returns proper error codes",
+    "steps": [
+      "Step 1: Make API request without auth token",
+      "Step 2: Verify 401 Unauthorized returned",
+      "Step 3: Request non-existent page",
+      "Step 4: Verify 404 Not Found returned",
+      "Step 5: Send malformed data",
+      "Step 6: Verify 400 Bad Request returned"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Passwords properly hashed in database",
+    "steps": [
+      "Step 1: Create user account",
+      "Step 2: Check database directly",
+      "Step 3: Verify password_hash column contains bcrypt hash",
+      "Step 4: Verify plaintext password not stored",
+      "Step 5: Verify hash starts with $2b$ or similar"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "SQL injection protection on inputs",
+    "steps": [
+      "Step 1: Attempt SQL injection in login form",
+      "Step 2: Enter: ' OR '1'='1",
+      "Step 3: Verify injection prevented",
+      "Step 4: Try in search fields",
+      "Step 5: Verify parameterized queries used"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "XSS protection on user content",
+    "steps": [
+      "Step 1: Try entering <script>alert('xss')</script> in content",
+      "Step 2: Save and view on public site",
+      "Step 3: Verify script not executed",
+      "Step 4: Verify content sanitized or escaped"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Login page has modern, centered design",
+    "steps": [
+      "Step 1: Navigate to /admin/login",
+      "Step 2: Take screenshot",
+      "Step 3: Verify centered login card",
+      "Step 4: Verify modern styling with shadows/borders",
+      "Step 5: Verify logo prominently displayed",
+      "Step 6: Verify clean, minimal design"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Login form fields have proper styling",
+    "steps": [
+      "Step 1: Navigate to login page",
+      "Step 2: Inspect form fields",
+      "Step 3: Verify inputs have focus states",
+      "Step 4: Verify labels properly positioned",
+      "Step 5: Verify password field has show/hide toggle",
+      "Step 6: Verify button has hover state"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Admin dashboard has clean, professional layout",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: View dashboard",
+      "Step 3: Take screenshot",
+      "Step 4: Verify sidebar with icons",
+      "Step 5: Verify top header bar",
+      "Step 6: Verify stat cards well-spaced",
+      "Step 7: Verify modern typography"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Sidebar navigation has consistent icon design",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Inspect sidebar",
+      "Step 3: Verify all menu items have icons",
+      "Step 4: Verify icons from same icon set",
+      "Step 5: Verify active state highlighted",
+      "Step 6: Verify hover states on items"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Admin tables have clean, readable design",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Pages list",
+      "Step 3: Inspect table design",
+      "Step 4: Verify alternating row colors or separators",
+      "Step 5: Verify good spacing between rows",
+      "Step 6: Verify sortable column headers",
+      "Step 7: Verify action buttons clearly visible"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Status badges have color-coded design",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: View pages list with various statuses",
+      "Step 3: Verify 'Draft' badge (e.g., gray)",
+      "Step 4: Verify 'Published' badge (e.g., green)",
+      "Step 5: Verify 'Scheduled' badge (e.g., blue)",
+      "Step 6: Verify badges have rounded corners",
+      "Step 7: Verify text legible on badge background"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Page editor has intuitive layout",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Open page editor",
+      "Step 3: Take screenshot",
+      "Step 4: Verify title input prominent at top",
+      "Step 5: Verify content area large and centered",
+      "Step 6: Verify sidebar panel on right",
+      "Step 7: Verify action buttons visible",
+      "Step 8: Verify clean, uncluttered design"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Rich text editor toolbar is well-organized",
+    "steps": [
+      "Step 1: Open page editor",
+      "Step 2: Focus on rich text editor",
+      "Step 3: Verify toolbar appears",
+      "Step 4: Verify buttons grouped logically",
+      "Step 5: Verify icons clear and recognizable",
+      "Step 6: Verify tooltips on hover",
+      "Step 7: Verify dropdown menus styled consistently"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Module cards have drag handles and clear hierarchy",
+    "steps": [
+      "Step 1: Open page with modules",
+      "Step 2: Inspect module cards",
+      "Step 3: Verify drag handle icon visible",
+      "Step 4: Verify module type header clear",
+      "Step 5: Verify content area distinct",
+      "Step 6: Verify action buttons in corner",
+      "Step 7: Verify card has subtle shadow/border"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Media library has grid layout with consistent thumbnails",
+    "steps": [
+      "Step 1: Navigate to Media Library",
+      "Step 2: Select grid view",
+      "Step 3: Take screenshot",
+      "Step 4: Verify images in uniform grid",
+      "Step 5: Verify thumbnails same size",
+      "Step 6: Verify hover states on items",
+      "Step 7: Verify selection checkboxes visible"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Media detail panel has organized layout",
+    "steps": [
+      "Step 1: Open Media Library",
+      "Step 2: Click on media item",
+      "Step 3: Verify detail panel appears",
+      "Step 4: Verify image preview large",
+      "Step 5: Verify metadata organized in sections",
+      "Step 6: Verify form fields styled consistently"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Public homepage has beautiful hero section",
+    "steps": [
+      "Step 1: Navigate to public site homepage",
+      "Step 2: Take screenshot of hero",
+      "Step 3: Verify full-width or large hero area",
+      "Step 4: Verify compelling headline typography",
+      "Step 5: Verify background image/gradient",
+      "Step 6: Verify CTA buttons prominent",
+      "Step 7: Verify modern, on-trend design"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Public site navigation is clean and accessible",
+    "steps": [
+      "Step 1: Navigate to public site",
+      "Step 2: Inspect navigation menu",
+      "Step 3: Verify horizontal menu layout",
+      "Step 4: Verify good spacing between items",
+      "Step 5: Verify hover/active states",
+      "Step 6: Verify logo on left",
+      "Step 7: Verify menu on right or centered"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Public site footer has organized sections",
+    "steps": [
+      "Step 1: Navigate to public site",
+      "Step 2: Scroll to footer",
+      "Step 3: Take screenshot",
+      "Step 4: Verify footer divided into columns",
+      "Step 5: Verify social icons styled consistently",
+      "Step 6: Verify copyright and legal links",
+      "Step 7: Verify good contrast on background"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Typography throughout site is modern and readable",
+    "steps": [
+      "Step 1: Navigate through public site pages",
+      "Step 2: Inspect typography choices",
+      "Step 3: Verify modern font family used",
+      "Step 4: Verify heading hierarchy clear (H1-H6)",
+      "Step 5: Verify body text readable size (16px+)",
+      "Step 6: Verify good line height for readability",
+      "Step 7: Verify font weights used appropriately"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Color scheme is consistent and professional",
+    "steps": [
+      "Step 1: Browse public site and admin",
+      "Step 2: Note primary color usage",
+      "Step 3: Verify consistent color palette",
+      "Step 4: Verify good contrast ratios",
+      "Step 5: Verify secondary/accent colors used sparingly",
+      "Step 6: Verify professional, not garish"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Buttons have consistent styling and hover states",
+    "steps": [
+      "Step 1: Browse site and admin",
+      "Step 2: Inspect all button types",
+      "Step 3: Verify primary button style",
+      "Step 4: Verify secondary button style",
+      "Step 5: Verify all buttons have hover states",
+      "Step 6: Verify focus states for accessibility",
+      "Step 7: Verify disabled states styled appropriately"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Form inputs have consistent, modern styling",
+    "steps": [
+      "Step 1: View various forms (login, contact, admin)",
+      "Step 2: Verify all inputs styled consistently",
+      "Step 3: Verify labels properly positioned",
+      "Step 4: Verify focus states visible",
+      "Step 5: Verify error states styled distinctly",
+      "Step 6: Verify placeholder text readable"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Modal dialogs have proper overlay and styling",
+    "steps": [
+      "Step 1: Trigger modal (e.g., delete confirmation)",
+      "Step 2: Verify dark overlay behind modal",
+      "Step 3: Verify modal centered on screen",
+      "Step 4: Verify modal has close button",
+      "Step 5: Verify modal content well-spaced",
+      "Step 6: Verify modal has shadow/elevation"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Loading indicators are visible and smooth",
+    "steps": [
+      "Step 1: Trigger loading state (upload, save, etc)",
+      "Step 2: Verify loading spinner or progress bar appears",
+      "Step 3: Verify animation smooth",
+      "Step 4: Verify loading text if applicable",
+      "Step 5: Verify loading state doesn't block entire UI unnecessarily"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Error messages are clearly styled and noticeable",
+    "steps": [
+      "Step 1: Trigger validation error",
+      "Step 2: Verify error message appears",
+      "Step 3: Verify red or warning color used",
+      "Step 4: Verify icon indicates error",
+      "Step 5: Verify message clearly readable",
+      "Step 6: Verify error dismissable if appropriate"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Success messages provide positive feedback",
+    "steps": [
+      "Step 1: Save content successfully",
+      "Step 2: Verify success message appears",
+      "Step 3: Verify green or positive color",
+      "Step 4: Verify checkmark or success icon",
+      "Step 5: Verify message auto-dismisses or manually dismissable"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Responsive design works on mobile (375px width)",
+    "steps": [
+      "Step 1: Resize browser to 375px width",
+      "Step 2: Navigate public site",
+      "Step 3: Verify layout adjusts appropriately",
+      "Step 4: Verify no horizontal scrolling",
+      "Step 5: Verify text readable without zooming",
+      "Step 6: Verify buttons/links tappable",
+      "Step 7: Verify images scale properly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Responsive design works on tablet (768px width)",
+    "steps": [
+      "Step 1: Resize browser to 768px width",
+      "Step 2: Browse public site",
+      "Step 3: Verify layout uses tablet-optimized design",
+      "Step 4: Verify navigation appropriate for tablet",
+      "Step 5: Verify content readable and well-spaced"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Mobile navigation menu is functional",
+    "steps": [
+      "Step 1: View public site on mobile width",
+      "Step 2: Verify hamburger menu icon appears",
+      "Step 3: Click hamburger icon",
+      "Step 4: Verify mobile menu opens",
+      "Step 5: Verify menu items stacked vertically",
+      "Step 6: Verify close button present",
+      "Step 7: Click menu item",
+      "Step 8: Verify menu closes and navigates"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Admin interface is touch-friendly on tablets",
+    "steps": [
+      "Step 1: Open admin on tablet device or emulation",
+      "Step 2: Try tapping buttons and links",
+      "Step 3: Verify tap targets adequately sized (44x44px+)",
+      "Step 4: Verify form inputs large enough",
+      "Step 5: Verify drag-and-drop works with touch"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Page transitions are smooth and polished",
+    "steps": [
+      "Step 1: Navigate between pages on public site",
+      "Step 2: Observe transition animations",
+      "Step 3: Verify smooth fade or slide transitions",
+      "Step 4: Verify no jarring layout shifts",
+      "Step 5: Verify transitions not too slow"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Hover states provide clear visual feedback",
+    "steps": [
+      "Step 1: Hover over various interactive elements",
+      "Step 2: Verify buttons change on hover",
+      "Step 3: Verify links have hover state",
+      "Step 4: Verify cards/items highlight on hover",
+      "Step 5: Verify cursor changes to pointer where appropriate"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Focus states are visible for keyboard navigation",
+    "steps": [
+      "Step 1: Use Tab key to navigate site",
+      "Step 2: Verify focused elements have visible outline or highlight",
+      "Step 3: Verify focus order is logical",
+      "Step 4: Verify all interactive elements reachable by keyboard"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Images are properly optimized and fast-loading",
+    "steps": [
+      "Step 1: Navigate to image-heavy page",
+      "Step 2: Monitor network tab",
+      "Step 3: Verify images load quickly",
+      "Step 4: Verify images use modern formats (WebP if supported)",
+      "Step 5: Verify images appropriately sized for display",
+      "Step 6: Verify lazy loading implemented"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Page load times are fast (< 3 seconds)",
+    "steps": [
+      "Step 1: Clear cache",
+      "Step 2: Navigate to public homepage",
+      "Step 3: Time page load",
+      "Step 4: Verify loads in under 3 seconds",
+      "Step 5: Check other pages",
+      "Step 6: Verify consistent performance"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Animations are smooth and not janky",
+    "steps": [
+      "Step 1: Navigate site and trigger animations",
+      "Step 2: Verify dropdown menus animate smoothly",
+      "Step 3: Verify modal open/close smooth",
+      "Step 4: Verify page transitions smooth",
+      "Step 5: Verify no stuttering or lag"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Layout is consistent across different browsers",
+    "steps": [
+      "Step 1: Open site in Chrome",
+      "Step 2: Take screenshots",
+      "Step 3: Open in Firefox",
+      "Step 4: Verify layout matches Chrome",
+      "Step 5: Open in Safari",
+      "Step 6: Verify consistent rendering",
+      "Step 7: Check Edge if available"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Dark mode support in admin (if applicable)",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Look for dark mode toggle",
+      "Step 3: Enable dark mode",
+      "Step 4: Verify all UI elements use dark theme",
+      "Step 5: Verify text remains readable",
+      "Step 6: Verify images/icons display correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Spacing and padding is consistent throughout UI",
+    "steps": [
+      "Step 1: Browse admin interface",
+      "Step 2: Inspect spacing between elements",
+      "Step 3: Verify consistent padding in cards/panels",
+      "Step 4: Verify consistent margins between sections",
+      "Step 5: Verify use of spacing scale (e.g., 4px, 8px, 16px)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete end-to-end workflow: Create, edit, preview, publish page",
+    "steps": [
+      "Step 1: Login to admin panel",
+      "Step 2: Click 'New Page'",
+      "Step 3: Enter page title 'Test Page'",
+      "Step 4: Add text content with formatting",
+      "Step 5: Add hero module with image",
+      "Step 6: Add CTA module",
+      "Step 7: Set featured image",
+      "Step 8: Configure SEO metadata",
+      "Step 9: Save as draft",
+      "Step 10: Click preview",
+      "Step 11: Verify content looks correct",
+      "Step 12: Return to editor",
+      "Step 13: Click publish",
+      "Step 14: Navigate to public site",
+      "Step 15: Verify page is live at correct URL"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete media workflow: Upload, organize, use in page",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Media Library",
+      "Step 3: Create folder 'Blog Images'",
+      "Step 4: Upload 5 images via drag-and-drop",
+      "Step 5: Verify all images uploaded successfully",
+      "Step 6: Move images into folder",
+      "Step 7: Select one image",
+      "Step 8: Add alt text and caption",
+      "Step 9: Save metadata",
+      "Step 10: Navigate to page editor",
+      "Step 11: Insert image from media library",
+      "Step 12: Publish page",
+      "Step 13: Verify image displays on public page with alt text"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete menu workflow: Create menu, add items, publish",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Create 3 pages (Home, About, Contact)",
+      "Step 3: Navigate to Menus",
+      "Step 4: Create new menu 'Main Navigation'",
+      "Step 5: Set location to 'Header'",
+      "Step 6: Add all 3 pages to menu",
+      "Step 7: Reorder items by dragging",
+      "Step 8: Create nested item under About",
+      "Step 9: Add custom link to external site",
+      "Step 10: Save menu",
+      "Step 11: Navigate to public site",
+      "Step 12: Verify menu displays in header",
+      "Step 13: Test all menu links",
+      "Step 14: Hover to verify nested dropdown works"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete user management workflow",
+    "steps": [
+      "Step 1: Login as admin",
+      "Step 2: Navigate to Users",
+      "Step 3: Create new user with Editor role",
+      "Step 4: Set email and temporary password",
+      "Step 5: Save user",
+      "Step 6: Logout",
+      "Step 7: Login as new editor user",
+      "Step 8: Verify editor access to pages",
+      "Step 9: Try to access user management",
+      "Step 10: Verify access denied",
+      "Step 11: Logout",
+      "Step 12: Login as admin",
+      "Step 13: Change editor to admin role",
+      "Step 14: Verify new admin can access user management"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete SEO workflow: Configure metadata, verify on page",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate to Settings > SEO",
+      "Step 3: Set default meta description",
+      "Step 4: Add Google Analytics ID",
+      "Step 5: Save settings",
+      "Step 6: Create new page",
+      "Step 7: Enter custom SEO title",
+      "Step 8: Enter meta description",
+      "Step 9: Configure Open Graph tags",
+      "Step 10: Add Twitter Card data",
+      "Step 11: Publish page",
+      "Step 12: View page source on public site",
+      "Step 13: Verify all meta tags present",
+      "Step 14: Verify GA script included"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete contact form workflow: Submit, view in admin",
+    "steps": [
+      "Step 1: Create page with contact form module",
+      "Step 2: Configure form fields",
+      "Step 3: Publish page",
+      "Step 4: Navigate to public contact page",
+      "Step 5: Fill out all form fields",
+      "Step 6: Submit form",
+      "Step 7: Verify success message",
+      "Step 8: Login to admin",
+      "Step 9: Check dashboard",
+      "Step 10: Verify submission appears in recent list",
+      "Step 11: Navigate to contact submissions",
+      "Step 12: Click on submission",
+      "Step 13: Verify all submitted data shown",
+      "Step 14: Mark as read"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete blog workflow: Create multiple posts, display on listing",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Create 12 blog posts with template 'Blog Post'",
+      "Step 3: Add featured images to all posts",
+      "Step 4: Write content with rich formatting",
+      "Step 5: Set different publish dates",
+      "Step 6: Publish all posts",
+      "Step 7: Navigate to public blog listing page",
+      "Step 8: Verify posts display in grid",
+      "Step 9: Verify pagination appears (10 per page)",
+      "Step 10: Click next page",
+      "Step 11: Verify posts 11-12 shown",
+      "Step 12: Click on a post",
+      "Step 13: Verify single post page displays correctly",
+      "Step 14: Verify related posts shown at bottom"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete revision workflow: Make changes, view history, restore",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Create page with content 'Version 1'",
+      "Step 3: Save",
+      "Step 4: Edit to 'Version 2'",
+      "Step 5: Save",
+      "Step 6: Edit to 'Version 3'",
+      "Step 7: Save",
+      "Step 8: Click 'Revision History'",
+      "Step 9: Verify 3 revisions listed with timestamps",
+      "Step 10: Click on Version 1",
+      "Step 11: Preview Version 1 content",
+      "Step 12: Click 'Restore this revision'",
+      "Step 13: Confirm restoration",
+      "Step 14: Verify content reverted to Version 1",
+      "Step 15: Check revision history",
+      "Step 16: Verify restoration created new revision"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Complete authentication workflow: Login, session, logout",
+    "steps": [
+      "Step 1: Navigate to /admin while logged out",
+      "Step 2: Verify redirect to login page",
+      "Step 3: Enter valid credentials",
+      "Step 4: Check 'Remember me'",
+      "Step 5: Login",
+      "Step 6: Verify JWT token stored",
+      "Step 7: Perform admin actions",
+      "Step 8: Close browser",
+      "Step 9: Reopen browser",
+      "Step 10: Navigate to /admin",
+      "Step 11: Verify still logged in (remembered)",
+      "Step 12: Click logout",
+      "Step 13: Verify redirect to login",
+      "Step 14: Verify token removed",
+      "Step 15: Try accessing /admin",
+      "Step 16: Verify must login again"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Complete visual consistency check across all admin pages",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Navigate through all sections (Dashboard, Pages, Media, Menus, Users, Settings)",
+      "Step 3: Take screenshots of each page",
+      "Step 4: Verify consistent header across all pages",
+      "Step 5: Verify consistent sidebar navigation",
+      "Step 6: Verify consistent typography",
+      "Step 7: Verify consistent button styling",
+      "Step 8: Verify consistent color scheme",
+      "Step 9: Verify consistent spacing/padding",
+      "Step 10: Verify no visual inconsistencies or misalignments"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Complete public site visual polish check",
+    "steps": [
+      "Step 1: Navigate to public site homepage",
+      "Step 2: Inspect hero section design quality",
+      "Step 3: Verify modern, eye-catching design",
+      "Step 4: Navigate to standard page",
+      "Step 5: Verify content readable and well-formatted",
+      "Step 6: Navigate to blog listing",
+      "Step 7: Verify attractive post grid/list",
+      "Step 8: Navigate to blog post",
+      "Step 9: Verify beautiful post layout",
+      "Step 10: Scroll to footer",
+      "Step 11: Verify professional footer design",
+      "Step 12: Test on mobile viewport",
+      "Step 13: Verify mobile design equally polished",
+      "Step 14: Overall assessment: modern, professional, production-ready"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Keyboard navigation works throughout admin interface",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Use Tab key to navigate",
+      "Step 3: Verify can reach all sidebar links",
+      "Step 4: Verify can activate links with Enter",
+      "Step 5: Navigate to form",
+      "Step 6: Verify Tab moves through form fields",
+      "Step 7: Verify Shift+Tab goes backwards",
+      "Step 8: Verify can submit form with keyboard"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Screen reader accessibility for main navigation",
+    "steps": [
+      "Step 1: Navigate to public site",
+      "Step 2: Enable screen reader",
+      "Step 3: Navigate to header",
+      "Step 4: Verify navigation landmarks announced",
+      "Step 5: Verify menu items readable",
+      "Step 6: Verify proper ARIA labels",
+      "Step 7: Verify link purposes clear"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Alt text enforcement for images",
+    "steps": [
+      "Step 1: Login to admin",
+      "Step 2: Try to insert image in content without alt text",
+      "Step 3: Verify warning or prompt for alt text",
+      "Step 4: Add alt text",
+      "Step 5: Save page",
+      "Step 6: Verify alt text appears in HTML"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Skip to content link for accessibility",
+    "steps": [
+      "Step 1: Navigate to public site",
+      "Step 2: Press Tab key",
+      "Step 3: Verify 'Skip to content' link appears",
+      "Step 4: Press Enter",
+      "Step 5: Verify focus jumps to main content",
+      "Step 6: Verify navigation was skipped"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Database initialization creates tables correctly",
+    "steps": [
+      "Step 1: Check database schema",
+      "Step 2: Verify users table exists with correct columns",
+      "Step 3: Verify pages table exists",
+      "Step 4: Verify page_modules table exists",
+      "Step 5: Verify page_revisions table exists",
+      "Step 6: Verify media and media_folders tables exist",
+      "Step 7: Verify menus and menu_items tables exist",
+      "Step 8: Verify site_settings table exists",
+      "Step 9: Verify contact_submissions table exists",
+      "Step 10: Verify foreign key constraints set correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Seed data creates initial admin user",
+    "steps": [
+      "Step 1: Run database initialization",
+      "Step 2: Check users table",
+      "Step 3: Verify at least one admin user exists",
+      "Step 4: Try logging in with default credentials",
+      "Step 5: Verify login successful",
+      "Step 6: Verify admin has full permissions"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "File upload creates proper directory structure",
+    "steps": [
+      "Step 1: Check if uploads directory exists",
+      "Step 2: Upload file to media library",
+      "Step 3: Verify file saved to uploads directory",
+      "Step 4: Verify subdirectories created if needed (by date, etc)",
+      "Step 5: Verify file permissions correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Environment variables loaded correctly",
+    "steps": [
+      "Step 1: Check .env file exists",
+      "Step 2: Verify JWT_SECRET set",
+      "Step 3: Verify frontend_port set",
+      "Step 4: Start backend server",
+      "Step 5: Verify environment variables accessible in code",
+      "Step 6: Verify JWT signing uses secret from .env"
+    ],
+    "passes": false
+  }
+]
