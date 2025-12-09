@@ -100,7 +100,7 @@
       "Step 5: Access /admin/users",
       "Step 6: Verify access granted"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

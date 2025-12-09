@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #5: Role-based access control prevents unauthorized actions
+## Task #8: Edit existing page updates content
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login as Editor role", "Step 2: Try accessing /admin/users", "Step 3: Verify access denied or hidden", "Step 4: Login as Admin role", "Step 5: Access /admin/users", "Step 6: Verify access granted"]
+["Step 1: Login to admin panel", "Step 2: Navigate to Pages list", "Step 3: Click edit on existing page", "Step 4: Modify page title and content", "Step 5: Click 'Save Draft'", "Step 6: Verify success message", "Step 7: Navigate back to pages list", "Step 8: Verify changes reflected"]
 
 ---
 
