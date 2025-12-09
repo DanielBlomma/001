@@ -322,7 +322,7 @@
       "Step 5: Click underline button",
       "Step 6: Verify underline applied"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

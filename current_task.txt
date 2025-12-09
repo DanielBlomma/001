@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #18: Rich text editor supports italic formatting
+## Task #19: Rich text editor supports underline formatting
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type text", "Step 4: Select text", "Step 5: Click italic button", "Step 6: Verify italic style applied", "Step 7: Save and verify on public site"]
+["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type text", "Step 4: Select text", "Step 5: Click underline button", "Step 6: Verify underline applied"]
 
 ---
 

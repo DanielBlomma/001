@@ -239,18 +239,15 @@ export default function PageEditorPage() {
               {/* Content */}
               <div>
                 <Label htmlFor="content">Content</Label>
-                <textarea
-                  id="content"
-                  name="content"
-                  value={formData.content}
-                  onChange={handleChange}
-                  rows={15}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
-                  placeholder="Enter page content (HTML or plain text)"
+                <RichTextEditor
+                  content={formData.content}
+                  onChange={(html) => {
+                    setFormData(prev => ({
+                      ...prev,
+                      content: html
+                    }))
+                  }}
                 />
-                <p className="text-sm text-gray-500 mt-1">
-                  Rich text editor will be available soon
-                </p>
               </div>
 
               {/* Excerpt */}
