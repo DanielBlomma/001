@@ -183,4 +183,57 @@ router.post('/forgot-password', async (req, res) => {
   }
 })
 
+// Reset password with token
+router.post('/reset-password', async (req, res) => {
+  const { token, newPassword } = req.body
+
+  if (!token || !newPassword) {
+    return res.status(400).json({ error: 'Token and new password are required' })
+  }
+
+  if (newPassword.length < 6) {
+    return res.status(400).json({ error: 'Password must be at least 6 characters' })
+  }
+
+  try {
+    // Find user with valid token
+    const user = db.prepare(`
+      SELECT id, email, reset_token, reset_token_expires
+      FROM users
+      WHERE reset_token = ? AND is_active = 1
+    `).get(token)
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid or expired reset token' })
+    }
+
+    // Check if token is expired
+    const now = new Date()
+    const expiresAt = new Date(user.reset_token_expires)
+    if (now > expiresAt) {
+      return res.status(400).json({ error: 'Reset token has expired' })
+    }
+
+    // Hash new password
+    const passwordHash = await bcrypt.hash(newPassword, 10)
+
+    // Update password and clear reset token
+    db.prepare(`
+      UPDATE users
+      SET password_hash = ?,
+          reset_token = NULL,
+          reset_token_expires = NULL,
+          updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?
+    `).run(passwordHash, user.id)
+
+    console.log('✅ Password reset successful for:', user.email)
+
+    res.json({ message: 'Password has been reset successfully' })
+  } catch (error) {
+    console.error('Reset password error:', error)
+    res.status(500).json({ error: 'An error occurred' })
+  }
+})
+
 export default router

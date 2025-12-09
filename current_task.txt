@@ -1,16 +1,17 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #6: Password reset request sends email
+## Task #7: Password reset with valid token updates password
 
 **Category:** functional
 
 **Steps:**
-- Step 1: Navigate to /admin/login
-- Step 2: Click 'Forgot password' link
-- Step 3: Enter email address
+- Step 1: Generate password reset token
+- Step 2: Navigate to /admin/reset-password?token=TOKEN
+- Step 3: Enter new password twice
 - Step 4: Submit form
-- Step 5: Verify success message displayed
-- Step 6: Check that reset email would be sent (console log or mock)
+- Step 5: Verify success message
+- Step 6: Login with new password
+- Step 7: Verify login successful
 
 ---
 
