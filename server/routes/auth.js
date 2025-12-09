@@ -142,4 +142,45 @@ router.post('/logout', authenticateToken, (req, res) => {
   res.json({ message: 'Logged out successfully' })
 })
 
+// Forgot password - request reset token
+router.post('/forgot-password', async (req, res) => {
+  const { email } = req.body
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required' })
+  }
+
+  try {
+    // Find user
+    const user = db.prepare('SELECT id, email FROM users WHERE email = ? AND is_active = 1').get(email)
+
+    // Always return success to prevent email enumeration
+    // But only generate token if user exists
+    if (user) {
+      // Generate random token
+      const resetToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      const expiresAt = new Date(Date.now() + 3600000).toISOString() // 1 hour from now
+
+      // Store token in database
+      db.prepare('UPDATE users SET reset_token = ?, reset_token_expires = ? WHERE id = ?')
+        .run(resetToken, expiresAt, user.id)
+
+      // In a real app, send email here
+      // For this demo, we'll just log it to console
+      console.log('📧 Password reset requested for:', user.email)
+      console.log('🔑 Reset token:', resetToken)
+      console.log('🔗 Reset link: http://localhost:5173/admin/reset-password?token=' + resetToken)
+      console.log('⏰ Expires at:', expiresAt)
+    }
+
+    // Always return success message (security best practice)
+    res.json({
+      message: 'If an account exists with that email, a password reset link has been sent.'
+    })
+  } catch (error) {
+    console.error('Forgot password error:', error)
+    res.status(500).json({ error: 'An error occurred' })
+  }
+})
+
 export default router

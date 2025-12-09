@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -97,9 +97,9 @@ export default function AdminLogin() {
             </Button>
 
             <div className="text-center text-sm">
-              <a href="#" className="text-primary hover:underline">
+              <Link to="/admin/forgot-password" className="text-primary hover:underline">
                 Forgot password?
-              </a>
+              </Link>
             </div>
           </form>
 

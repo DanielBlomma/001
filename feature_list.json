@@ -73,7 +73,7 @@
       "Step 5: Verify success message displayed",
       "Step 6: Check that reset email would be sent (console log or mock)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

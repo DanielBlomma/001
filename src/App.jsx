@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/public/HomePage'
 import PublicPage from './pages/public/PublicPage'
 import AdminLogin from './pages/admin/AdminLogin'
+import ForgotPassword from './pages/admin/ForgotPassword'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import PagesListPage from './pages/admin/PagesListPage'
 import PageEditorPage from './pages/admin/PageEditorPage'
@@ -22,6 +23,7 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/forgot-password" element={<ForgotPassword />} />
         <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
           <Route index element={<AdminDashboard />} />
           <Route path="pages" element={<PagesListPage />} />
