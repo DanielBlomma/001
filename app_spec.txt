@@ -1,0 +1,654 @@
+<project_specification>
+  <project_name>Modern Content Management System</project_name>
+
+  <overview>
+    Build a fully functional, modular Content Management System (CMS) with a beautiful, modern frontend 
+    and a secure admin interface. The system should allow administrators to create, edit, and manage 
+    website content through an intuitive admin panel with authentication. Key features include:
+    - Public-facing website with modern, responsive design
+    - Secure admin login and authentication
+    - Content editing with live preview before publishing
+    - Draft/Published workflow for content
+    - Modular page system with reusable components
+    - Media library for images and files
+    - SEO management tools
+    - Mobile-first responsive design with latest UI/UX trends
+  </overview>
+
+  <technology_stack>
+    <frontend>
+      <framework>React with Vite</framework>
+      <styling>Tailwind CSS with shadcn/ui components</styling>
+      <icons>Lucide React for modern icons</icons>
+      <state_management>React hooks and context</state_management>
+      <routing>React Router for navigation (public site + admin)</routing>
+      <rich_text_editor>TipTap or Slate for content editing</rich_text_editor>
+      <forms>React Hook Form with Zod validation</forms>
+      <ui_components>shadcn/ui for modern, accessible components</ui_components>
+      <port>Only launch on port {frontend_port}</port>
+    </frontend>
+    <backend>
+      <runtime>Node.js with Express</runtime>
+      <database>SQLite with better-sqlite3</database>
+      <authentication>JWT tokens with bcrypt for password hashing</authentication>
+      <file_upload>Multer for media management</file_upload>
+      <image_processing>Sharp for image optimization</image_processing>
+    </backend>
+    <communication>
+      <api>RESTful endpoints</api>
+      <auth>JWT-based authentication</auth>
+      <file_handling>Multipart form data for uploads</file_handling>
+    </communication>
+  </technology_stack>
+
+  <prerequisites>
+    <environment_setup>
+      - Repository includes .env with JWT_SECRET and other config
+      - Frontend dependencies pre-installed via pnpm
+      - Backend code goes in /server directory
+      - Install backend dependencies as needed
+      - Create uploads directory for media files
+      - Initialize database with admin user seed data
+    </environment_setup>
+  </prerequisites>
+
+  <core_features>
+    <authentication_system>
+      - Secure login page with email/password
+      - JWT token-based authentication
+      - Password hashing with bcrypt
+      - Session management
+      - Logout functionality
+      - Password reset flow (email-based)
+      - Remember me option
+      - Protected admin routes
+      - Role-based access control (Admin, Editor, Viewer)
+    </authentication_system>
+
+    <public_website>
+      - Modern, beautiful homepage with hero section
+      - Dynamic page rendering from CMS content
+      - Responsive navigation menu
+      - Footer with social links and site info
+      - Blog/news section with pagination
+      - Contact page with form
+      - About page
+      - SEO-optimized meta tags
+      - Fast loading with optimized images
+      - Smooth animations and transitions
+      - Mobile-first responsive design
+    </public_website>
+
+    <admin_dashboard>
+      - Clean admin interface with sidebar navigation
+      - Dashboard overview with statistics
+      - Quick actions panel
+      - Recent content activity feed
+      - User management section
+      - Site settings configuration
+      - Analytics overview (page views, popular content)
+      - System health indicators
+    </admin_dashboard>
+
+    <content_management>
+      - Create new pages with rich text editor
+      - Edit existing pages
+      - Delete pages with confirmation
+      - Duplicate pages
+      - Page templates (Homepage, Blog Post, Standard Page, etc.)
+      - Custom fields per page type
+      - URL slug management
+      - Parent-child page hierarchy
+      - Page ordering/sorting
+      - Bulk actions (publish, unpublish, delete)
+    </content_management>
+
+    <content_editor>
+      - Rich text editor (TipTap/Slate) with formatting toolbar
+      - Heading styles (H1-H6)
+      - Bold, italic, underline, strikethrough
+      - Lists (ordered, unordered)
+      - Links with target options
+      - Image insertion from media library
+      - Embed videos (YouTube, Vimeo)
+      - Code blocks with syntax highlighting
+      - Tables
+      - Blockquotes
+      - Horizontal rules
+      - Text alignment
+      - Undo/redo functionality
+      - Markdown support (optional)
+    </content_editor>
+
+    <draft_publish_workflow>
+      - Save as draft (auto-save every 30 seconds)
+      - Publish immediately
+      - Schedule publishing for future date/time
+      - Unpublish published content
+      - Revision history with restore capability
+      - Preview draft before publishing
+      - Status indicators (Draft, Published, Scheduled)
+      - Last modified timestamp and user
+    </draft_publish_workflow>
+
+    <preview_system>
+      - Live preview panel (side-by-side with editor)
+      - Full-page preview in new tab
+      - Mobile/tablet/desktop preview modes
+      - Preview unpublished changes
+      - Preview scheduled content
+      - Share preview link with stakeholders
+    </preview_system>
+
+    <modular_components>
+      - Reusable content blocks/modules
+      - Hero section module
+      - Text block module
+      - Image gallery module
+      - Call-to-action (CTA) module
+      - Testimonials module
+      - FAQ accordion module
+      - Contact form module
+      - Video embed module
+      - Drag-and-drop module ordering
+      - Module settings and customization
+      - Import/export module templates
+    </modular_components>
+
+    <media_library>
+      - Upload images (JPG, PNG, GIF, WebP, SVG)
+      - Upload documents (PDF, DOC, etc.)
+      - Drag-and-drop file upload
+      - Image preview thumbnails
+      - Image editing (crop, resize, rotate)
+      - Automatic image optimization
+      - Organize media in folders
+      - Search media by filename
+      - Filter by file type and date
+      - Delete unused media
+      - Media usage tracking (where used)
+      - Alt text and caption management
+    </media_library>
+
+    <seo_management>
+      - Page title optimization
+      - Meta description editor
+      - Open Graph tags (social sharing)
+      - Twitter Card tags
+      - Canonical URL management
+      - Robots meta tags
+      - XML sitemap generation
+      - SEO score/recommendations
+      - Keyword suggestions
+      - Preview how page appears in search results
+    </seo_management>
+
+    <navigation_management>
+      - Create/edit navigation menus
+      - Drag-and-drop menu ordering
+      - Multi-level nested menus
+      - Add custom links
+      - Add pages to menu
+      - Menu item visibility toggle
+      - Multiple menu locations (header, footer, sidebar)
+      - Mobile menu configuration
+    </navigation_management>
+
+    <user_management>
+      - Create new admin users
+      - Edit user profiles
+      - Assign roles and permissions
+      - Deactivate users
+      - User activity log
+      - Password reset for users
+      - User avatar upload
+    </user_management>
+
+    <site_settings>
+      - Site title and tagline
+      - Logo upload
+      - Favicon upload
+      - Contact information
+      - Social media links
+      - Google Analytics integration
+      - Custom CSS/JavaScript injection
+      - Email SMTP configuration
+      - Maintenance mode toggle
+      - Language/locale settings
+    </site_settings>
+
+    <accessibility>
+      - Full keyboard navigation
+      - Screen reader support
+      - ARIA labels and roles
+      - High contrast mode support
+      - Focus management
+      - Skip to content links
+      - Alt text requirements for images
+    </accessibility>
+
+    <responsive_design>
+      - Mobile-first responsive layout
+      - Touch-optimized admin interface
+      - Responsive tables and forms
+      - Adaptive navigation
+      - Optimized for tablets
+      - Progressive Web App (PWA) capabilities
+    </responsive_design>
+  </core_features>
+
+  <database_schema>
+    <tables>
+      <users>
+        - id (PRIMARY KEY)
+        - email (UNIQUE, NOT NULL)
+        - password_hash (NOT NULL)
+        - name
+        - role (admin/editor/viewer)
+        - avatar_url
+        - is_active (DEFAULT true)
+        - created_at
+        - updated_at
+        - last_login
+      </users>
+
+      <pages>
+        - id (PRIMARY KEY)
+        - title (NOT NULL)
+        - slug (UNIQUE, NOT NULL)
+        - content (JSON - rich text content)
+        - excerpt
+        - featured_image_id (FK to media)
+        - template (homepage/blog_post/standard/landing)
+        - parent_id (FK to pages, for hierarchy)
+        - author_id (FK to users)
+        - status (draft/published/scheduled)
+        - published_at
+        - scheduled_at
+        - sort_order
+        - created_at
+        - updated_at
+      </pages>
+
+      <page_modules>
+        - id (PRIMARY KEY)
+        - page_id (FK to pages)
+        - module_type (hero/text/gallery/cta/testimonials/faq/contact/video)
+        - content (JSON - module-specific data)
+        - settings (JSON - styling, layout options)
+        - sort_order
+        - is_visible (DEFAULT true)
+        - created_at
+        - updated_at
+      </page_modules>
+
+      <page_revisions>
+        - id (PRIMARY KEY)
+        - page_id (FK to pages)
+        - content (JSON - snapshot of page content)
+        - modules (JSON - snapshot of modules)
+        - author_id (FK to users)
+        - created_at
+      </page_revisions>
+
+      <media>
+        - id (PRIMARY KEY)
+        - filename (NOT NULL)
+        - original_filename
+        - mime_type
+        - file_size
+        - width (for images)
+        - height (for images)
+        - alt_text
+        - caption
+        - folder_id (FK to media_folders)
+        - uploaded_by (FK to users)
+        - created_at
+      </media>
+
+      <media_folders>
+        - id (PRIMARY KEY)
+        - name (NOT NULL)
+        - parent_id (FK to media_folders)
+        - created_at
+      </media_folders>
+
+      <menus>
+        - id (PRIMARY KEY)
+        - name (NOT NULL)
+        - location (header/footer/sidebar)
+        - created_at
+        - updated_at
+      </menus>
+
+      <menu_items>
+        - id (PRIMARY KEY)
+        - menu_id (FK to menus)
+        - label (NOT NULL)
+        - url
+        - page_id (FK to pages, optional)
+        - parent_id (FK to menu_items)
+        - target (_self/_blank)
+        - sort_order
+        - is_visible (DEFAULT true)
+      </menu_items>
+
+      <site_settings>
+        - id (PRIMARY KEY)
+        - key (UNIQUE, NOT NULL)
+        - value (JSON)
+        - updated_at
+      </site_settings>
+
+      <contact_submissions>
+        - id (PRIMARY KEY)
+        - name
+        - email
+        - subject
+        - message
+        - page_id (FK to pages)
+        - is_read (DEFAULT false)
+        - created_at
+      </contact_submissions>
+    </tables>
+  </database_schema>
+
+  <api_endpoints>
+    <authentication>
+      - POST /api/auth/login - Login with email/password, returns JWT
+      - POST /api/auth/logout - Invalidate session
+      - GET /api/auth/me - Get current user info
+      - PUT /api/auth/profile - Update profile
+      - POST /api/auth/password - Change password
+      - POST /api/auth/forgot-password - Request password reset
+      - POST /api/auth/reset-password - Reset password with token
+    </authentication>
+
+    <pages>
+      - GET /api/pages - List all pages (with filters: status, template)
+      - POST /api/pages - Create new page
+      - GET /api/pages/:id - Get page by ID
+      - PUT /api/pages/:id - Update page
+      - DELETE /api/pages/:id - Delete page
+      - POST /api/pages/:id/duplicate - Duplicate page
+      - PUT /api/pages/:id/publish - Publish page
+      - PUT /api/pages/:id/unpublish - Unpublish page
+      - GET /api/pages/:id/revisions - Get revision history
+      - POST /api/pages/:id/revisions/:revisionId/restore - Restore revision
+      - GET /api/pages/:id/preview - Get preview token
+    </pages>
+
+    <modules>
+      - GET /api/pages/:pageId/modules - Get modules for page
+      - POST /api/pages/:pageId/modules - Add module to page
+      - PUT /api/modules/:id - Update module
+      - DELETE /api/modules/:id - Delete module
+      - PUT /api/pages/:pageId/modules/reorder - Reorder modules
+    </modules>
+
+    <media>
+      - GET /api/media - List media (with filters: type, folder)
+      - POST /api/media/upload - Upload file(s)
+      - GET /api/media/:id - Get media details
+      - PUT /api/media/:id - Update media (alt, caption)
+      - DELETE /api/media/:id - Delete media
+      - GET /api/media/folders - List folders
+      - POST /api/media/folders - Create folder
+      - PUT /api/media/folders/:id - Rename folder
+      - DELETE /api/media/folders/:id - Delete folder
+    </media>
+
+    <menus>
+      - GET /api/menus - List all menus
+      - POST /api/menus - Create menu
+      - GET /api/menus/:id - Get menu with items
+      - PUT /api/menus/:id - Update menu
+      - DELETE /api/menus/:id - Delete menu
+      - POST /api/menus/:id/items - Add menu item
+      - PUT /api/menu-items/:id - Update menu item
+      - DELETE /api/menu-items/:id - Delete menu item
+      - PUT /api/menus/:id/items/reorder - Reorder items
+    </menus>
+
+    <users>
+      - GET /api/users - List users (admin only)
+      - POST /api/users - Create user (admin only)
+      - GET /api/users/:id - Get user
+      - PUT /api/users/:id - Update user
+      - DELETE /api/users/:id - Deactivate user
+    </users>
+
+    <settings>
+      - GET /api/settings - Get all site settings
+      - PUT /api/settings - Update settings
+      - POST /api/settings/logo - Upload logo
+      - POST /api/settings/favicon - Upload favicon
+    </settings>
+
+    <public_api>
+      - GET /api/public/pages - Get published pages
+      - GET /api/public/pages/:slug - Get page by slug
+      - GET /api/public/menus/:location - Get menu by location
+      - GET /api/public/settings - Get public site settings
+      - POST /api/public/contact - Submit contact form
+      - GET /api/public/preview/:token - Preview unpublished page
+    </public_api>
+
+    <dashboard>
+      - GET /api/dashboard/stats - Get overview statistics
+      - GET /api/dashboard/recent-activity - Recent content changes
+      - GET /api/dashboard/contact-submissions - Recent form submissions
+    </dashboard>
+  </api_endpoints>
+
+  <ui_layout>
+    <public_website>
+      <header>
+        - Logo (links to homepage)
+        - Main navigation menu (horizontal, responsive)
+        - Mobile hamburger menu
+        - Optional: Search, CTA button
+      </header>
+
+      <homepage>
+        - Hero section with headline, subtext, CTA buttons
+        - Feature sections with icons/images
+        - Testimonials carousel
+        - Recent blog posts grid
+        - Call-to-action banner
+        - Footer
+      </homepage>
+
+      <standard_page>
+        - Page title/hero
+        - Dynamic content from modules
+        - Sidebar (optional)
+        - Related pages
+        - Footer
+      </standard_page>
+
+      <blog_listing>
+        - Page title
+        - Blog post grid/list with thumbnails
+        - Pagination
+        - Category/tag filters
+        - Search
+      </blog_listing>
+
+      <blog_post>
+        - Featured image
+        - Title, date, author
+        - Content with rich formatting
+        - Share buttons
+        - Author bio
+        - Related posts
+        - Comments (optional)
+      </blog_post>
+
+      <footer>
+        - Logo and tagline
+        - Footer navigation links
+        - Social media icons
+        - Contact info
+        - Copyright notice
+        - Newsletter signup (optional)
+      </footer>
+    </public_website>
+
+    <admin_interface>
+      <login_page>
+        - Centered login card
+        - Logo
+        - Email and password fields
+        - Remember me checkbox
+        - Login button
+        - Forgot password link
+      </login_page>
+
+      <admin_layout>
+        - Fixed sidebar navigation (collapsible)
+        - Top header bar with user menu
+        - Main content area
+        - Breadcrumb navigation
+      </admin_layout>
+
+      <sidebar_navigation>
+        - Dashboard (home icon)
+        - Pages (document icon)
+        - Media Library (image icon)
+        - Menus (menu icon)
+        - Users (users icon)
+        - Settings (gear icon)
+        - View Site (external link)
+        - Collapse toggle
+      </sidebar_navigation>
+
+      <dashboard_page>
+        - Welcome message
+        - Quick stats cards (pages, media, users)
+        - Quick actions (new page, upload media)
+        - Recent activity feed
+        - Recent contact submissions
+      </dashboard_page>
+
+      <pages_list>
+        - "New Page" button
+        - Search and filter bar
+        - Table with columns: Title, Status, Author, Modified
+        - Status badges (Draft, Published, Scheduled)
+        - Row actions (Edit, Preview, Duplicate, Delete)
+        - Bulk actions
+        - Pagination
+      </pages_list>
+
+      <page_editor>
+        - Back button to pages list
+        - Page title input (large)
+        - Slug editor
+        - Template selector
+        - Module list with drag handles
+        - "Add Module" button with module type picker
+        - Right sidebar panel:
+          - Publish settings (status, date)
+          - Featured image selector
+          - SEO fields (title, description)
+          - Parent page selector
+        - Action buttons: Save Draft, Preview, Publish
+      </page_editor>
+
+      <module_editor>
+        - Module type header with icon
+        - Module-specific fields
+        - Rich text editor (for text modules)
+        - Image picker (for image modules)
+        - Repeater fields (for galleries, FAQs)
+        - Visibility toggle
+        - Delete module button
+      </module_editor>
+
+      <media_library>
+        - Upload dropzone
+        - Grid/list view toggle
+        - Folder tree sidebar
+        - Search and filter
+        - Media grid with thumbnails
+        - Selection mode for picking images
+        - Media detail panel (alt, caption, usage)
+      </media_library>
+
+      <menu_editor>
+        - Menu selector dropdown
+        - Drag-and-drop menu tree
+        - Add item form (page or custom link)
+        - Item settings (label, target)
+        - Nested items with indentation
+        - Save button
+      </menu_editor>
+
+      <users_list>
+        - "Add User" button
+        - Users table: Name, Email, Role, Status, Last Login
+        - Role badges
+        - Edit/Deactivate actions
+      </users_list>
+
+      <settings_page>
+        - Tabbed interface:
+          - General (site title, tagline)
+          - Branding (logo, favicon, colors)
+          - Contact (address, phone, email)
+          - Social (social media links)
+          - SEO (default meta, analytics)
+      </settings_page>
+
+      <preview_mode>
+        - Preview toolbar at top
+        - Device size toggles (mobile/tablet/desktop)
+        - "Exit Preview" button
+        - "Publish" button
+        - iframe with page content
+      </preview_mode>
+    </admin_interface>
+  </ui_layout>
+
+  <success_criteria>
+    <functionality>
+      - Admin login works securely with JWT authentication
+      - Content creation and editing with rich text editor
+      - Draft/publish workflow functions correctly
+      - Preview shows accurate representation before publishing
+      - Media library handles uploads and organization
+      - Modular components can be added/removed/reordered
+      - Public website renders content dynamically
+      - All CRUD operations functional
+    </functionality>
+
+    <user_experience>
+      - Modern, beautiful design following 2024/2025 UI trends
+      - Responsive on all device sizes (mobile-first)
+      - Smooth animations and transitions
+      - Fast page loads with optimized images
+      - Intuitive admin navigation and workflows
+      - Clear feedback for all actions
+      - Preview accurately reflects published result
+    </user_experience>
+
+    <technical_quality>
+      - Clean, maintainable code structure
+      - Proper error handling throughout
+      - Secure authentication and authorization
+      - Optimized database queries
+      - Image optimization for performance
+      - SEO-friendly markup and meta tags
+    </technical_quality>
+
+    <design_polish>
+      - Professional, modern visual design
+      - Beautiful typography and spacing
+      - Smooth animations and micro-interactions
+      - Excellent contrast and accessibility
+      - Consistent component styling
+      - Dark mode support in admin
+    </design_polish>
+  </success_criteria>
+</project_specification>
