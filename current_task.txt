@@ -1,0 +1,19 @@
+# CURRENT TASK - PRIORITY FOCUS
+
+## Task #2: Unnamed
+
+**Category:** functional
+**Priority:** 3
+
+**Description:**
+["Step 1: Navigate to /admin/login", "Step 2: Enter valid credentials", "Step 3: Check 'Remember me' checkbox", "Step 4: Click login button", "Step 5: Close and reopen browser", "Step 6: Navigate to /admin", "Step 7: Verify user still logged in"]
+
+---
+
+**INSTRUCTIONS:**
+1. Focus ONLY on this specific task
+2. Follow the standard workflow in coding_prompt
+3. Update feature_list.json when task passes
+4. Keep changes minimal and focused
+
+When done, the system will handle git commit/push/PR.
