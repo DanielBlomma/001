@@ -1,19 +1,23 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #25: Rich text editor supports image insertion from media library
+## Task #6: Password reset request sends email
 
 **Category:** functional
-**Priority:** 3
 
-**Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Click insert image button", "Step 4: Media library modal opens", "Step 5: Select an image", "Step 6: Click insert", "Step 7: Verify image appears in editor", "Step 8: Save and verify image on public page"]
+**Steps:**
+- Step 1: Navigate to /admin/login
+- Step 2: Click 'Forgot password' link
+- Step 3: Enter email address
+- Step 4: Submit form
+- Step 5: Verify success message displayed
+- Step 6: Check that reset email would be sent (console log or mock)
 
 ---
 
 **INSTRUCTIONS:**
 1. Focus ONLY on this specific task
 2. Follow the standard workflow in coding_prompt
-3. Update feature_list.json when task passes
+3. Update feature_list.json when task passes (set passes: true)
 4. Keep changes minimal and focused
 
 When done, the system will handle git commit/push/PR.

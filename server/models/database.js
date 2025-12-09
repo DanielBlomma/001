@@ -19,6 +19,8 @@ export function initDatabase() {
       role TEXT DEFAULT 'editor',
       avatar_url TEXT,
       is_active INTEGER DEFAULT 1,
+      reset_token TEXT,
+      reset_token_expires DATETIME,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       last_login DATETIME
