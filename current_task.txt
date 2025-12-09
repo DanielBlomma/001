@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #15: Page revision history tracks changes
+## Task #17: Rich text editor supports bold formatting
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Edit a page and save", "Step 3: Make another edit and save", "Step 4: Make a third edit and save", "Step 5: Click 'Revision History' button", "Step 6: Verify list of revisions with timestamps", "Step 7: Verify each revision shows author", "Step 8: Verify ability to view each revision"]
+["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Type text in editor", "Step 4: Select text", "Step 5: Click bold button", "Step 6: Verify text appears bold in editor", "Step 7: Save and preview", "Step 8: Verify bold formatting preserved"]
 
 ---
 
