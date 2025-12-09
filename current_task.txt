@@ -1,12 +1,12 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #22: Rich text editor supports ordered lists
+## Task #23: Rich text editor supports unordered lists
 
 **Category:** functional
 **Priority:** 3
 
 **Description:**
-["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Click ordered list button", "Step 4: Type list items", "Step 5: Press Enter to create new items", "Step 6: Verify numbered list created", "Step 7: Save and verify on preview"]
+["Step 1: Login to admin panel", "Step 2: Navigate to page editor", "Step 3: Click unordered list button", "Step 4: Type list items", "Step 5: Verify bullet list created", "Step 6: Save and preview"]
 
 ---
 
