@@ -9,7 +9,7 @@
       "Step 4: Verify redirect to admin dashboard",
       "Step 5: Verify JWT token stored in localStorage/cookie"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -21,7 +21,7 @@
       "Step 4: Verify error message displayed",
       "Step 5: Verify user remains on login page"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -48,7 +48,7 @@
       "Step 5: Try accessing /admin directly",
       "Step 6: Verify redirect to login"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -60,7 +60,7 @@
       "Step 4: Try accessing /admin/media",
       "Step 5: Verify redirect to login page"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

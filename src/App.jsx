@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PublicLayout from './components/layouts/PublicLayout'
 import AdminLayout from './components/layouts/AdminLayout'
+import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/public/HomePage'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -20,7 +21,7 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
           <Route index element={<AdminDashboard />} />
           <Route path="pages" element={<div className="p-6">
             <h1 className="text-2xl font-bold">Pages</h1>
