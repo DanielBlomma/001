@@ -1,19 +1,18 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #15: Publish draft page makes it visible on public site
+## Task #16: Unpublish page removes from public site
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
-- Step 2: Create new page with content
-- Step 3: Save as draft
-- Step 4: Verify public site doesn't show page
-- Step 5: Click 'Publish' button
-- Step 6: Verify success message
-- Step 7: Navigate to public site
-- Step 8: Verify page is now visible
-- Step 9: Verify published_at timestamp set
+- Step 2: Find published page
+- Step 3: Click 'Unpublish' action
+- Step 4: Verify success message
+- Step 5: Navigate to public site
+- Step 6: Verify page no longer accessible
+- Step 7: Return to admin
+- Step 8: Verify status changed to 'Draft'
 
 ---
 

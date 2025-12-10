@@ -4,7 +4,7 @@ import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card'
 import { Dialog, DialogHeader, DialogTitle, DialogContent, DialogFooter } from '../../components/ui/Dialog'
-import { FileText, Plus, Search, Edit, Trash2, Eye, Copy, AlertTriangle, Upload } from 'lucide-react'
+import { FileText, Plus, Search, Edit, Trash2, Eye, Copy, AlertTriangle, Upload, Download } from 'lucide-react'
 
 export default function PagesListPage() {
   const navigate = useNavigate()
@@ -126,6 +126,29 @@ export default function PagesListPage() {
     }
   }
 
+  async function unpublishPage(page) {
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`http://localhost:3001/api/pages/${page.id}/unpublish`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (response.ok) {
+        setSuccessMessage(`Page "${page.title}" unpublished successfully`)
+        setTimeout(() => setSuccessMessage(''), 3000)
+        fetchPages()
+      } else {
+        const error = await response.json()
+        alert(`Error unpublishing page: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error unpublishing page:', error)
+      alert('An error occurred while unpublishing the page')
+    }
+  }
 
   const filteredPages = pages.filter(page => {
     if (!search) return true
@@ -260,6 +283,17 @@ export default function PagesListPage() {
                               className="text-green-600 hover:text-green-700 hover:bg-green-50"
                             >
                               <Upload className="w-4 h-4" />
+                            </Button>
+                          )}
+                          {page.status === 'published' && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => unpublishPage(page)}
+                              title="Unpublish"
+                              className="text-orange-600 hover:text-orange-700 hover:bg-orange-50"
+                            >
+                              <Download className="w-4 h-4" />
                             </Button>
                           )}
                           <Button

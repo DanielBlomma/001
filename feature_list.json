@@ -219,7 +219,7 @@
       "Step 7: Return to admin",
       "Step 8: Verify status changed to 'Draft'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
