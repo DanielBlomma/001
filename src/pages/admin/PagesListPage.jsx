@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card'
-import { FileText, Plus, Search, Edit, Trash2, Eye, Copy } from 'lucide-react'
+import { Dialog, DialogHeader, DialogTitle, DialogContent, DialogFooter } from '../../components/ui/Dialog'
+import { FileText, Plus, Search, Edit, Trash2, Eye, Copy, AlertTriangle, Upload } from 'lucide-react'
 
 export default function PagesListPage() {
   const navigate = useNavigate()
@@ -11,6 +12,9 @@ export default function PagesListPage() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [pageToDelete, setPageToDelete] = useState(null)
+  const [successMessage, setSuccessMessage] = useState('')
 
   useEffect(() => {
     fetchPages()
@@ -41,12 +45,22 @@ export default function PagesListPage() {
     }
   }
 
-  async function deletePage(id) {
-    if (!confirm('Are you sure you want to delete this page?')) return
+  function openDeleteModal(page) {
+    setPageToDelete(page)
+    setDeleteModalOpen(true)
+  }
+
+  function closeDeleteModal() {
+    setDeleteModalOpen(false)
+    setPageToDelete(null)
+  }
+
+  async function confirmDelete() {
+    if (!pageToDelete) return
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`http://localhost:3001/api/pages/${id}`, {
+      const response = await fetch(`http://localhost:3001/api/pages/${pageToDelete.id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -54,6 +68,9 @@ export default function PagesListPage() {
       })
 
       if (response.ok) {
+        setSuccessMessage(`Page "${pageToDelete.title}" deleted successfully`)
+        setTimeout(() => setSuccessMessage(''), 3000)
+        closeDeleteModal()
         fetchPages()
       }
     } catch (error) {
@@ -85,6 +102,31 @@ export default function PagesListPage() {
     }
   }
 
+  async function publishPage(page) {
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`http://localhost:3001/api/pages/${page.id}/publish`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (response.ok) {
+        setSuccessMessage(`Page "${page.title}" published successfully`)
+        setTimeout(() => setSuccessMessage(''), 3000)
+        fetchPages()
+      } else {
+        const error = await response.json()
+        alert(`Error publishing page: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error publishing page:', error)
+      alert('An error occurred while publishing the page')
+    }
+  }
+
+
   const filteredPages = pages.filter(page => {
     if (!search) return true
     return page.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -115,6 +157,13 @@ export default function PagesListPage() {
 
   return (
     <div className="p-6 space-y-6">
+      {/* Success Message */}
+      {successMessage && (
+        <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
+          <span>{successMessage}</span>
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Pages</h1>
         <Button onClick={() => navigate('/admin/pages/new')}>
@@ -202,6 +251,17 @@ export default function PagesListPage() {
                       <td className="py-3 px-4 text-gray-600">{formatDate(page.updated_at)}</td>
                       <td className="py-3 px-4">
                         <div className="flex items-center justify-end gap-2">
+                          {page.status === 'draft' && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => publishPage(page)}
+                              title="Publish"
+                              className="text-green-600 hover:text-green-700 hover:bg-green-50"
+                            >
+                              <Upload className="w-4 h-4" />
+                            </Button>
+                          )}
                           <Button
                             variant="ghost"
                             size="sm"
@@ -230,7 +290,7 @@ export default function PagesListPage() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => deletePage(page.id)}
+                            onClick={() => openDeleteModal(page)}
                             title="Delete"
                             className="text-red-600 hover:text-red-700 hover:bg-red-50"
                           >
@@ -246,6 +306,47 @@ export default function PagesListPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Delete Confirmation Modal */}
+      <Dialog open={deleteModalOpen} onClose={closeDeleteModal}>
+        <DialogHeader onClose={closeDeleteModal}>
+          <DialogTitle>Delete Page</DialogTitle>
+        </DialogHeader>
+        <DialogContent>
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0">
+              <AlertTriangle className="w-12 h-12 text-red-600" />
+            </div>
+            <div>
+              <p className="text-gray-900 font-medium mb-2">
+                Are you sure you want to delete this page?
+              </p>
+              {pageToDelete && (
+                <p className="text-gray-600 mb-4">
+                  <strong>{pageToDelete.title}</strong>
+                </p>
+              )}
+              <p className="text-gray-500 text-sm">
+                This action cannot be undone. The page will be permanently removed from the database.
+              </p>
+            </div>
+          </div>
+        </DialogContent>
+        <DialogFooter>
+          <Button
+            variant="ghost"
+            onClick={closeDeleteModal}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={confirmDelete}
+            className="bg-red-600 hover:bg-red-700 text-white"
+          >
+            Delete Page
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </div>
   )
 }
