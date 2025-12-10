@@ -4410,3 +4410,289 @@ the existing authentication system. Users can now securely update
 their passwords from the profile settings page.
 
 =======================================================
+
+=======================================================
+TASK #16 COMPLETION REPORT
+Unpublish Page Removes from Public Site
+=======================================================
+
+SESSION SUMMARY:
+Successfully implemented and verified the unpublish functionality that
+removes published pages from the public site.
+
+Date: December 10, 2025
+Agent: Swarm Mode - Task #16
+Starting Point: 23/203 tests passing
+Ending Point: 24/203 tests passing (11.8%)
+
+=======================================================
+COMPLETED WORK:
+=======================================================
+
+✅ FRONTEND IMPLEMENTATION:
+   - Added unpublishPage() function to PagesListPage.jsx
+     * Calls PUT /api/pages/:id/unpublish endpoint
+     * Shows success message on completion
+     * Refreshes page list to show updated status
+   - Added Download icon import from lucide-react
+   - Added conditional unpublish button for published pages
+     * Orange styling (text-orange-600 with orange-50 background)
+     * Only appears when page.status === 'published'
+     * Positioned before Edit button in actions column
+   - Publish button only shows for draft pages
+   - Unpublish button only shows for published pages
+
+✅ BACKEND VERIFICATION:
+   - Confirmed PUT /api/pages/:id/unpublish endpoint exists
+     * Located in server/routes/pages.js lines 264-295
+     * Updates status to 'draft'
+     * Returns updated page data
+   - Confirmed public API filters correctly
+     * GET /api/public/pages/:slug includes WHERE status='published'
+     * Located in server/routes/public.js line 48
+     * Unpublished pages return 404
+
+=======================================================
+TESTING PERFORMED (BROWSER AUTOMATION):
+=======================================================
+
+✅ Step 1: Login to admin panel
+   - Navigated to /admin/login
+   - Entered credentials: admin@example.com / admin123
+   - Successfully authenticated
+
+✅ Step 2: Found published page
+   - Navigated to /admin/pages
+   - Found "Test Page About Our Services" with status="published"
+   - Unpublish button (orange download icon) visible
+
+✅ Step 3: Clicked 'Unpublish' action
+   - Clicked orange download button
+   - API call executed successfully
+
+✅ Step 4: Verified success message
+   - Green notification banner appeared
+   - Message: "Page 'Test Page About Our Services' unpublished successfully"
+   - Auto-dismissed after 3 seconds
+
+✅ Step 5: Navigate to public site
+   - Navigated to /t (the page's slug)
+   - Public site loaded correctly
+
+✅ Step 6: Verified page no longer accessible
+   - "Page Not Found" heading displayed
+   - "Page not found" message shown
+   - Page content not visible
+   - Public layout (header/footer) still present
+
+✅ Step 7: Return to admin
+   - Navigated back to /admin/pages
+   - Pages list loaded successfully
+
+✅ Step 8: Verified status changed to 'Draft'
+   - Page now shows gray "draft" badge
+   - Unpublish button replaced with green publish button
+   - Page remained in list (not deleted)
+   - All other page data intact
+
+=======================================================
+SCREENSHOTS CAPTURED:
+=======================================================
+
+1. step1-login-page.png - Admin login form
+2. step2-pages-list.png - Pages list with published pages
+3. step3-pages-with-unpublish-button.png - Orange unpublish buttons visible
+4. step4-after-unpublish-click.png - Success message and draft status
+5. step5-public-page-not-found.png - 404 page on public site
+6. step6-admin-verify-draft-status.png - Final verification in admin
+
+=======================================================
+CODE CHANGES:
+=======================================================
+
+Modified Files:
+1. src/pages/admin/PagesListPage.jsx
+   - Line 7: Added Download icon import
+   - Lines 129-151: Added unpublishPage() function
+   - Lines 288-298: Added conditional unpublish button
+
+2. feature_list.json
+   - Line 222: Changed "passes": false to "passes": true
+
+No Backend Changes Required:
+- Unpublish endpoint already existed and working
+- Public API already filtering by status correctly
+
+=======================================================
+FEATURE BEHAVIOR:
+=======================================================
+
+✅ UI/UX:
+   - Unpublish button only shows for published pages
+   - Orange color distinguishes from green publish button
+   - Download icon suggests "taking down" from public
+   - Success notification provides clear feedback
+   - Page list updates immediately after action
+   - Status badge changes from green to gray
+
+✅ Data Flow:
+   1. User clicks unpublish button
+   2. Frontend calls PUT /api/pages/:id/unpublish
+   3. Backend updates status to 'draft' in database
+   4. Backend returns updated page data
+   5. Frontend shows success message
+   6. Frontend refreshes page list
+   7. Public API no longer returns the page (404)
+
+✅ Security:
+   - Requires authentication (JWT token)
+   - Protected route (admin only)
+   - Proper error handling
+
+=======================================================
+TESTS PASSING:
+=======================================================
+
+Before: 23/203 tests passing (11.3%)
+After:  24/203 tests passing (11.8%)
+
+New passing test:
+✅ Test #16: Unpublish page removes from public site
+
+Related passing tests:
+✅ Test #15: Publish draft page makes it visible on public site
+✅ Test #13: Delete page with confirmation removes from database
+✅ Test #11: Create new page with basic content
+
+=======================================================
+KNOWN ISSUES:
+=======================================================
+
+None identified. Feature working perfectly.
+
+=======================================================
+NEXT STEPS:
+=======================================================
+
+Continue with remaining tests in feature_list.json:
+- Test #17: Schedule page for future publishing
+- Test #18: View revision history for page
+- Test #19: Restore page to previous revision
+- Test #20+: Additional CMS features
+
+=======================================================
+GIT COMMIT:
+=======================================================
+
+Commit: c095505
+Branch: task-16-unpublish-page-removes-from-pu
+Message: "Task #16: Unpublish page removes from public site - VERIFIED"
+Files changed: 3
+Insertions: 44
+Deletions: 11
+
+=======================================================
+SESSION COMPLETE - TASK #16 SUCCESSFUL
+=======================================================
+
+Total time: Task #16 session
+Implementation: Complete and verified end-to-end
+Tests passing: 24/203 (11.8%)
+Code status: Clean, committed, ready for next task
+
+The unpublish feature is fully functional and integrated with
+the existing publish/draft workflow. Pages can be easily taken
+down from the public site while preserving all data for future
+republishing.
+
+=======================================================
+
+=======================================================
+TASK #16 RE-VERIFICATION - Unpublish Page
+Agent: Swarm Task Agent
+Date: December 10, 2025
+=======================================================
+
+## Assignment
+Re-verified Task #16: "Unpublish page removes from public site"
+This task was already completed in a previous session (commit c095505)
+but was re-assigned for verification.
+
+## Verification Steps Completed
+
+✅ Step 1: Login to admin panel
+   - Successfully logged in with admin@example.com
+   - Redirected to dashboard
+
+✅ Step 2: Find published page
+   - Navigated to /admin/pages
+   - Found "Test Publishing Feature" with status: published
+
+✅ Step 3: Click 'Unpublish' action
+   - Clicked the unpublish button (orange down arrow icon)
+   - Action executed successfully
+
+✅ Step 4: Verify success message
+   - Success message displayed: "Page 'Test Publishing Feature' unpublished successfully"
+   - Green notification banner appeared at top of page
+
+✅ Step 5: Navigate to public site
+   - Navigated to http://localhost:5173/test-publishing-feature
+   - Confirmed page is no longer accessible
+
+✅ Step 6: Verify page no longer accessible
+   - Public site shows "Page Not Found" message
+   - This confirms the page is not served to public users
+
+✅ Step 7: Return to admin
+   - Returned to /admin/pages
+   - Admin panel still accessible
+
+✅ Step 8: Verify status changed to 'Draft'
+   - Page status changed from "published" (green) to "draft" (gray)
+   - Confirmed in the pages list table
+
+## Technical Verification
+
+Backend API:
+- PUT /api/pages/:id/unpublish endpoint working correctly
+- Updates status to 'draft' in database
+- Returns updated page data
+
+Frontend UI:
+- Unpublish button visible for published pages
+- Success notification displays correctly
+- Page list updates immediately after unpublish
+- Status badge changes color (green → gray)
+
+Public API:
+- GET /api/public/pages/:slug only returns published pages
+- Draft pages return 404 Not Found
+- PublicPage component displays "Page Not Found" correctly
+
+## Test Status
+✅ Test #16: "Unpublish page removes from public site" - PASSING
+- Feature already implemented and working
+- All 8 test steps verified through browser automation
+- Screenshots captured for documentation
+
+## Screenshots Captured
+1. task16-01-login-page.png - Login page
+2. task16-06-after-login-redirect.png - Dashboard after login
+3. task16-07-pages-list.png - Pages list with published page
+4. task16-09-after-unpublish-click.png - Success message and status change
+5. task16-10-public-page-not-found.png - Page not found on public site
+6. task16-11-admin-final-status.png - Final status confirmation
+
+## Summary
+The unpublish feature is fully functional and working as expected.
+When a page is unpublished:
+1. Status changes from 'published' to 'draft'
+2. Success notification is displayed
+3. Page is removed from public site (404)
+4. Admin can still access and edit the page
+5. Admin can re-publish the page later
+
+No issues found. Feature is production-ready.
+
+=======================================================
