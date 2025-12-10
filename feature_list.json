@@ -173,7 +173,7 @@
       "Step 7: Try accessing deleted page by ID",
       "Step 8: Verify 404 error"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
