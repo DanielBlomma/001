@@ -1,0 +1,26 @@
+# CURRENT TASK - PRIORITY FOCUS
+
+## Task #20: Restore previous revision replaces current content
+
+**Category:** functional
+
+**Steps:**
+- Step 1: Login to admin panel
+- Step 2: Create page with initial content 'Version 1'
+- Step 3: Edit to 'Version 2' and save
+- Step 4: Edit to 'Version 3' and save
+- Step 5: Open revision history
+- Step 6: Select Version 1
+- Step 7: Click 'Restore' button
+- Step 8: Verify content reverted to 'Version 1'
+- Step 9: Verify new revision created for restore
+
+---
+
+**INSTRUCTIONS:**
+1. Focus ONLY on this specific task
+2. Follow the standard workflow in coding_prompt
+3. Update feature_list.json when task passes (set passes: true)
+4. Keep changes minimal and focused
+
+When done, the system will handle git commit/push/PR.
