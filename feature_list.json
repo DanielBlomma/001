@@ -128,7 +128,7 @@
       "Step 7: Login with new password",
       "Step 8: Verify login successful"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

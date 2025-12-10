@@ -1,16 +1,18 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #9: User profile update changes saved successfully
+## Task #10: Change password from profile settings
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
 - Step 2: Navigate to profile settings
-- Step 3: Update name and email
-- Step 4: Save changes
-- Step 5: Verify success message
-- Step 6: Refresh page and verify changes persisted
+- Step 3: Enter current password
+- Step 4: Enter new password twice
+- Step 5: Save changes
+- Step 6: Logout
+- Step 7: Login with new password
+- Step 8: Verify login successful
 
 ---
 
