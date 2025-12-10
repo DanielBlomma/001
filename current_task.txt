@@ -1,0 +1,26 @@
+# CURRENT TASK - PRIORITY FOCUS
+
+## Task #28: Rich text editor supports hyperlinks
+
+**Category:** functional
+
+**Steps:**
+- Step 1: Login to admin panel
+- Step 2: Navigate to page editor
+- Step 3: Type and select text
+- Step 4: Click link button
+- Step 5: Enter URL in link dialog
+- Step 6: Choose target (_self or _blank)
+- Step 7: Save link
+- Step 8: Verify link created with href
+- Step 9: Preview and test link functionality
+
+---
+
+**INSTRUCTIONS:**
+1. Focus ONLY on this specific task
+2. Follow the standard workflow in coding_prompt
+3. Update feature_list.json when task passes (set passes: true)
+4. Keep changes minimal and focused
+
+When done, the system will handle git commit/push/PR.
