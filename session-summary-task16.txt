@@ -1,0 +1,71 @@
+========================================
+TASK #16 SESSION SUMMARY
+Unpublish Page Removes from Public Site
+========================================
+
+OBJECTIVE:
+Implement and verify the unpublish functionality that removes published pages from the public site.
+
+STATUS: ✅ COMPLETE
+
+========================================
+WORK COMPLETED:
+========================================
+
+1. FRONTEND IMPLEMENTATION
+   - Added unpublishPage() function to PagesListPage.jsx
+   - Added Download icon for unpublish button (orange styling)
+   - Added conditional rendering: unpublish button shows only for published pages
+   - Success message displays after unpublishing
+   - Page list automatically refreshes to show updated status
+
+2. BACKEND VERIFICATION
+   - Confirmed PUT /api/pages/:id/unpublish endpoint exists and works
+   - Verified public API correctly filters by status='published'
+   - Unpublished pages return 404 on public site
+
+3. END-TO-END TESTING (Browser Automation)
+   ✅ Step 1: Logged in to admin panel
+   ✅ Step 2: Found published page "Test Page About Our Services"
+   ✅ Step 3: Clicked orange unpublish button
+   ✅ Step 4: Verified success message displayed
+   ✅ Step 5: Navigated to public site (/t)
+   ✅ Step 6: Verified "Page Not Found" displayed
+   ✅ Step 7: Returned to admin panel
+   ✅ Step 8: Verified status changed to "draft"
+
+========================================
+RESULTS:
+========================================
+
+✅ Test #16 now passing
+✅ 24/203 tests passing (11.8%)
+✅ Feature working perfectly
+✅ All changes committed
+
+FILES MODIFIED:
+- src/pages/admin/PagesListPage.jsx (added unpublish functionality)
+- feature_list.json (marked test as passing)
+- claude-progress.txt (session notes)
+
+GIT COMMITS:
+- c095505: Task #16 implementation and verification
+- a96ff59: Progress notes
+
+========================================
+NEXT STEPS:
+========================================
+
+Continue with remaining features:
+- Test #17: Schedule page for future publishing
+- Test #18: View revision history for page
+- Test #19: Restore page to previous revision
+- Additional CMS features from feature_list.json
+
+========================================
+SESSION COMPLETE
+========================================
+
+Total time: Task #16 session
+Code quality: Clean, tested, committed
+Ready for: Next task
