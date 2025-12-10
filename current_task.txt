@@ -1,18 +1,18 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #17: Schedule page for future publishing
+## Task #18: Auto-save draft every 30 seconds preserves content
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
-- Step 2: Create or edit page
-- Step 3: Select 'Scheduled' status
-- Step 4: Set future date and time
-- Step 5: Save page
-- Step 6: Verify scheduled_at timestamp saved
-- Step 7: Verify public site doesn't show page yet
-- Step 8: Verify status badge shows 'Scheduled'
+- Step 2: Start editing a page
+- Step 3: Add content to editor
+- Step 4: Wait 30 seconds without saving
+- Step 5: Verify auto-save indicator appears
+- Step 6: Refresh page
+- Step 7: Verify content was preserved
+- Step 8: Verify no data loss
 
 ---
 

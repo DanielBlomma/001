@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
@@ -6,7 +6,7 @@ import { Label } from '../../components/ui/Label'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card'
 import { RevisionHistory } from '../../components/RevisionHistory'
 import RichTextEditor from '../../components/RichTextEditor'
-import { ArrowLeft, Save, Eye, History } from 'lucide-react'
+import { ArrowLeft, Save, Eye, History, CheckCircle2, Loader2 } from 'lucide-react'
 
 export default function PageEditorPage() {
   const navigate = useNavigate()
@@ -15,9 +15,13 @@ export default function PageEditorPage() {
 
   const [loading, setLoading] = useState(isEditMode)
   const [saving, setSaving] = useState(false)
+  const [autoSaving, setAutoSaving] = useState(false)
+  const [lastAutoSaved, setLastAutoSaved] = useState(null)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [showRevisions, setShowRevisions] = useState(false)
+  const autoSaveTimerRef = useRef(null)
+  const hasUnsavedChangesRef = useRef(false)
 
   const [formData, setFormData] = useState({
     title: '',
@@ -34,6 +38,39 @@ export default function PageEditorPage() {
       fetchPage()
     }
   }, [id])
+
+  // Auto-save effect - triggers every 30 seconds if there are unsaved changes
+  useEffect(() => {
+    // Clear any existing timer
+    if (autoSaveTimerRef.current) {
+      clearInterval(autoSaveTimerRef.current)
+    }
+
+    // Only enable auto-save if we're editing an existing page (not creating new)
+    // and the page has loaded
+    if (isEditMode && !loading) {
+      autoSaveTimerRef.current = setInterval(() => {
+        if (hasUnsavedChangesRef.current) {
+          performAutoSave()
+        }
+      }, 30000) // 30 seconds
+    }
+
+    // Cleanup timer on unmount
+    return () => {
+      if (autoSaveTimerRef.current) {
+        clearInterval(autoSaveTimerRef.current)
+      }
+    }
+  }, [isEditMode, loading, id])
+
+  // Track changes to form data
+  useEffect(() => {
+    // Don't mark as unsaved during initial load
+    if (!loading) {
+      hasUnsavedChangesRef.current = true
+    }
+  }, [formData.title, formData.slug, formData.content, formData.excerpt, formData.template, formData.status, formData.scheduled_at])
 
   async function fetchPage() {
     try {
@@ -72,6 +109,38 @@ export default function PageEditorPage() {
     }
   }
 
+  async function performAutoSave() {
+    // Don't auto-save if already saving or if not in edit mode
+    if (autoSaving || saving || !isEditMode) {
+      return
+    }
+
+    setAutoSaving(true)
+
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`http://localhost:3001/api/pages/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+
+      if (response.ok) {
+        setLastAutoSaved(new Date())
+        hasUnsavedChangesRef.current = false
+      } else {
+        console.error('Auto-save failed:', await response.text())
+      }
+    } catch (error) {
+      console.error('Auto-save error:', error)
+    } finally {
+      setAutoSaving(false)
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
@@ -96,6 +165,7 @@ export default function PageEditorPage() {
 
       if (response.ok) {
         const data = await response.json()
+        hasUnsavedChangesRef.current = false
         setSuccess(`Page ${isEditMode ? 'updated' : 'created'} successfully!`)
         setTimeout(() => {
           navigate('/admin/pages')
@@ -155,6 +225,23 @@ export default function PageEditorPage() {
           <h1 className="text-3xl font-bold">
             {isEditMode ? 'Edit Page' : 'New Page'}
           </h1>
+          {/* Auto-save indicator */}
+          {isEditMode && (
+            <div className="flex items-center gap-2 text-sm">
+              {autoSaving && (
+                <span className="flex items-center text-blue-600">
+                  <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                  Saving...
+                </span>
+              )}
+              {!autoSaving && lastAutoSaved && (
+                <span className="flex items-center text-green-600">
+                  <CheckCircle2 className="w-4 h-4 mr-1" />
+                  Last saved: {lastAutoSaved.toLocaleTimeString()}
+                </span>
+              )}
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-2">
           {isEditMode && (
