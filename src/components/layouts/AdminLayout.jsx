@@ -7,7 +7,8 @@ import {
   Users,
   Settings,
   ExternalLink,
-  LogOut
+  LogOut,
+  UserCircle
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -85,6 +86,12 @@ export default function AdminLayout() {
               <span className="text-sm text-muted-foreground">
                 admin@example.com
               </span>
+              <Link to="/admin/profile">
+                <Button variant="ghost" size="sm">
+                  <UserCircle className="h-4 w-4 mr-2" />
+                  Profile
+                </Button>
+              </Link>
             </div>
           </div>
         </header>
