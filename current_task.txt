@@ -1,18 +1,19 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #17: Schedule page for future publishing
+## Task #28: Rich text editor supports hyperlinks
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
-- Step 2: Create or edit page
-- Step 3: Select 'Scheduled' status
-- Step 4: Set future date and time
-- Step 5: Save page
-- Step 6: Verify scheduled_at timestamp saved
-- Step 7: Verify public site doesn't show page yet
-- Step 8: Verify status badge shows 'Scheduled'
+- Step 2: Navigate to page editor
+- Step 3: Type and select text
+- Step 4: Click link button
+- Step 5: Enter URL in link dialog
+- Step 6: Choose target (_self or _blank)
+- Step 7: Save link
+- Step 8: Verify link created with href
+- Step 9: Preview and test link functionality
 
 ---
 
