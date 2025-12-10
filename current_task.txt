@@ -1,18 +1,18 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #16: Unpublish page removes from public site
+## Task #17: Schedule page for future publishing
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
-- Step 2: Find published page
-- Step 3: Click 'Unpublish' action
-- Step 4: Verify success message
-- Step 5: Navigate to public site
-- Step 6: Verify page no longer accessible
-- Step 7: Return to admin
-- Step 8: Verify status changed to 'Draft'
+- Step 2: Create or edit page
+- Step 3: Select 'Scheduled' status
+- Step 4: Set future date and time
+- Step 5: Save page
+- Step 6: Verify scheduled_at timestamp saved
+- Step 7: Verify public site doesn't show page yet
+- Step 8: Verify status badge shows 'Scheduled'
 
 ---
 

@@ -75,7 +75,7 @@ router.get('/:id', authenticateToken, (req, res) => {
 
 // Create new page
 router.post('/', authenticateToken, (req, res) => {
-  const { title, slug, content, excerpt, template, status, parent_id } = req.body
+  const { title, slug, content, excerpt, template, status, parent_id, scheduled_at } = req.body
 
   if (!title) {
     return res.status(400).json({ error: 'Title is required' })
@@ -100,8 +100,8 @@ router.post('/', authenticateToken, (req, res) => {
     // Insert page
     const result = db.prepare(`
       INSERT INTO pages (
-        title, slug, content, excerpt, template, status, parent_id, author_id
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        title, slug, content, excerpt, template, status, parent_id, author_id, scheduled_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       title,
       pageSlug,
@@ -110,7 +110,8 @@ router.post('/', authenticateToken, (req, res) => {
       template || 'standard',
       status || 'draft',
       parent_id || null,
-      req.user.id
+      req.user.id,
+      scheduled_at || null
     )
 
     // Get the created page
@@ -133,7 +134,7 @@ router.post('/', authenticateToken, (req, res) => {
 
 // Update page
 router.put('/:id', authenticateToken, (req, res) => {
-  const { title, slug, content, excerpt, template, status, parent_id, featured_image_id } = req.body
+  const { title, slug, content, excerpt, template, status, parent_id, featured_image_id, scheduled_at } = req.body
 
   try {
     // Check if page exists
@@ -177,6 +178,7 @@ router.put('/:id', authenticateToken, (req, res) => {
           status = COALESCE(?, status),
           parent_id = ?,
           featured_image_id = ?,
+          scheduled_at = ?,
           updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
     `).run(
@@ -188,6 +190,7 @@ router.put('/:id', authenticateToken, (req, res) => {
       status,
       parent_id,
       featured_image_id,
+      scheduled_at,
       req.params.id
     )
 
