@@ -112,6 +112,43 @@ export default function PageEditorPage() {
     }
   }
 
+  async function handlePublish() {
+    if (!id) return
+
+    setError('')
+    setSuccess('')
+    setSaving(true)
+
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`http://localhost:3001/api/pages/${id}/publish`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        setSuccess('Page published successfully!')
+        setFormData(prev => ({
+          ...prev,
+          status: 'published'
+        }))
+        // Refresh the page data to get published_at timestamp
+        fetchPage()
+      } else {
+        const errorData = await response.json()
+        setError(errorData.error || 'Failed to publish page')
+      }
+    } catch (error) {
+      console.error('Error publishing page:', error)
+      setError('An error occurred while publishing the page')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   function handleChange(e) {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -324,6 +361,19 @@ export default function PageEditorPage() {
                   <option value="landing">Landing Page</option>
                 </select>
               </div>
+
+              {/* Publish Button - Only show in edit mode and when status is draft */}
+              {isEditMode && formData.status === 'draft' && (
+                <div className="pt-4 border-t">
+                  <Button
+                    onClick={handlePublish}
+                    disabled={saving}
+                    className="w-full"
+                  >
+                    Publish Now
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

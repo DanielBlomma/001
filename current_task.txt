@@ -1,18 +1,18 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #10: Change password from profile settings
+## Task #13: Delete page with confirmation removes from database
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
-- Step 2: Navigate to profile settings
-- Step 3: Enter current password
-- Step 4: Enter new password twice
-- Step 5: Save changes
-- Step 6: Logout
-- Step 7: Login with new password
-- Step 8: Verify login successful
+- Step 2: Navigate to Pages list
+- Step 3: Click delete on a page
+- Step 4: Confirm deletion in modal
+- Step 5: Verify success message
+- Step 6: Verify page removed from list
+- Step 7: Try accessing deleted page by ID
+- Step 8: Verify 404 error
 
 ---
 

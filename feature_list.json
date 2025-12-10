@@ -204,7 +204,7 @@
       "Step 8: Verify page is now visible",
       "Step 9: Verify published_at timestamp set"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

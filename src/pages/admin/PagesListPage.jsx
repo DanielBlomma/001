@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card'
-import { FileText, Plus, Search, Edit, Trash2, Eye, Copy } from 'lucide-react'
+import { Dialog, DialogHeader, DialogTitle, DialogContent, DialogFooter } from '../../components/ui/Dialog'
+import { FileText, Plus, Search, Edit, Trash2, Eye, Copy, AlertTriangle } from 'lucide-react'
 
 export default function PagesListPage() {
   const navigate = useNavigate()
@@ -11,6 +12,9 @@ export default function PagesListPage() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
+  const [pageToDelete, setPageToDelete] = useState(null)
+  const [deleteMessage, setDeleteMessage] = useState('')
 
   useEffect(() => {
     fetchPages()
@@ -41,12 +45,24 @@ export default function PagesListPage() {
     }
   }
 
-  async function deletePage(id) {
-    if (!confirm('Are you sure you want to delete this page?')) return
+  function openDeleteConfirm(page) {
+    setPageToDelete(page)
+    setDeleteConfirmOpen(true)
+    setDeleteMessage('')
+  }
+
+  function closeDeleteConfirm() {
+    setDeleteConfirmOpen(false)
+    setPageToDelete(null)
+    setDeleteMessage('')
+  }
+
+  async function confirmDelete() {
+    if (!pageToDelete) return
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`http://localhost:3001/api/pages/${id}`, {
+      const response = await fetch(`http://localhost:3001/api/pages/${pageToDelete.id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -54,10 +70,19 @@ export default function PagesListPage() {
       })
 
       if (response.ok) {
-        fetchPages()
+        setDeleteMessage('Page deleted successfully!')
+        // Wait a moment to show the success message
+        setTimeout(() => {
+          closeDeleteConfirm()
+          fetchPages()
+        }, 1000)
+      } else {
+        const error = await response.json()
+        setDeleteMessage(`Error: ${error.error || 'Failed to delete page'}`)
       }
     } catch (error) {
       console.error('Error deleting page:', error)
+      setDeleteMessage('An error occurred while deleting the page')
     }
   }
 
@@ -230,7 +255,7 @@ export default function PagesListPage() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => deletePage(page.id)}
+                            onClick={() => openDeleteConfirm(page)}
                             title="Delete"
                             className="text-red-600 hover:text-red-700 hover:bg-red-50"
                           >
@@ -246,6 +271,59 @@ export default function PagesListPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteConfirmOpen} onClose={closeDeleteConfirm}>
+        <DialogHeader onClose={closeDeleteConfirm}>
+          <DialogTitle>Delete Page</DialogTitle>
+        </DialogHeader>
+        <DialogContent>
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0">
+              <AlertTriangle className="w-6 h-6 text-red-600" />
+            </div>
+            <div className="flex-1">
+              <p className="text-gray-700 mb-2">
+                Are you sure you want to delete this page?
+              </p>
+              {pageToDelete && (
+                <div className="bg-gray-50 p-3 rounded-md mb-3">
+                  <p className="font-semibold text-gray-900">{pageToDelete.title}</p>
+                  <p className="text-sm text-gray-500">/{pageToDelete.slug}</p>
+                </div>
+              )}
+              <p className="text-sm text-gray-600">
+                This action cannot be undone. The page will be permanently removed from the database.
+              </p>
+              {deleteMessage && (
+                <div className={`mt-3 p-3 rounded-md ${
+                  deleteMessage.includes('success')
+                    ? 'bg-green-50 text-green-800'
+                    : 'bg-red-50 text-red-800'
+                }`}>
+                  {deleteMessage}
+                </div>
+              )}
+            </div>
+          </div>
+        </DialogContent>
+        <DialogFooter>
+          <Button
+            variant="outline"
+            onClick={closeDeleteConfirm}
+            disabled={deleteMessage.includes('success')}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="destructive"
+            onClick={confirmDelete}
+            disabled={deleteMessage.includes('success')}
+          >
+            Delete Page
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </div>
   )
 }
