@@ -1,0 +1,25 @@
+# CURRENT TASK - PRIORITY FOCUS
+
+## Task #18: Auto-save draft every 30 seconds preserves content
+
+**Category:** functional
+
+**Steps:**
+- Step 1: Login to admin panel
+- Step 2: Start editing a page
+- Step 3: Add content to editor
+- Step 4: Wait 30 seconds without saving
+- Step 5: Verify auto-save indicator appears
+- Step 6: Refresh page
+- Step 7: Verify content was preserved
+- Step 8: Verify no data loss
+
+---
+
+**INSTRUCTIONS:**
+1. Focus ONLY on this specific task
+2. Follow the standard workflow in coding_prompt
+3. Update feature_list.json when task passes (set passes: true)
+4. Keep changes minimal and focused
+
+When done, the system will handle git commit/push/PR.
