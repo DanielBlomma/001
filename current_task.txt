@@ -1,19 +1,18 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #28: Rich text editor supports hyperlinks
+## Task #18: Auto-save draft every 30 seconds preserves content
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
-- Step 2: Navigate to page editor
-- Step 3: Type and select text
-- Step 4: Click link button
-- Step 5: Enter URL in link dialog
-- Step 6: Choose target (_self or _blank)
-- Step 7: Save link
-- Step 8: Verify link created with href
-- Step 9: Preview and test link functionality
+- Step 2: Start editing a page
+- Step 3: Add content to editor
+- Step 4: Wait 30 seconds without saving
+- Step 5: Verify auto-save indicator appears
+- Step 6: Refresh page
+- Step 7: Verify content was preserved
+- Step 8: Verify no data loss
 
 ---
 
