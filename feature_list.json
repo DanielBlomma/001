@@ -173,7 +173,7 @@
       "Step 7: Try accessing deleted page by ID",
       "Step 8: Verify 404 error"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -204,7 +204,7 @@
       "Step 8: Verify page is now visible",
       "Step 9: Verify published_at timestamp set"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

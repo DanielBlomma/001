@@ -1,18 +1,19 @@
 # CURRENT TASK - PRIORITY FOCUS
 
-## Task #10: Change password from profile settings
+## Task #15: Publish draft page makes it visible on public site
 
 **Category:** functional
 
 **Steps:**
 - Step 1: Login to admin panel
-- Step 2: Navigate to profile settings
-- Step 3: Enter current password
-- Step 4: Enter new password twice
-- Step 5: Save changes
-- Step 6: Logout
-- Step 7: Login with new password
-- Step 8: Verify login successful
+- Step 2: Create new page with content
+- Step 3: Save as draft
+- Step 4: Verify public site doesn't show page
+- Step 5: Click 'Publish' button
+- Step 6: Verify success message
+- Step 7: Navigate to public site
+- Step 8: Verify page is now visible
+- Step 9: Verify published_at timestamp set
 
 ---
 
